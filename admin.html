@@ -1,0 +1,1349 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>أدمن رمال</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #080808;
+      --bg-2: #111111;
+      --panel: rgba(255, 255, 255, 0.06);
+      --panel-2: rgba(255, 255, 255, 0.09);
+      --line: rgba(255, 255, 255, 0.08);
+      --text: #ffffff;
+      --muted: #c7c7c7;
+      --muted-2: #9f9f9f;
+      --red: #b30018;
+      --red-2: #e21a32;
+      --green: #2ab86f;
+      --orange: #e39b2f;
+      --blue: #2f7de3;
+      --danger: #ff4f65;
+      --radius-xl: 28px;
+      --radius-lg: 22px;
+      --radius-md: 16px;
+      --shadow: 0 18px 50px rgba(0, 0, 0, 0.42);
+      --shadow-soft: 0 12px 30px rgba(0, 0, 0, 0.22);
+      --container: 1500px;
+      --receipt-bg: #ffffff;
+      --receipt-text: #101010;
+      --receipt-line: #d8d8d8;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Tajawal', sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top right, rgba(226, 26, 50, 0.15), transparent 24%),
+        radial-gradient(circle at bottom left, rgba(179, 0, 24, 0.12), transparent 24%),
+        linear-gradient(180deg, #070707 0%, #0b0b0b 100%);
+      min-height: 100vh;
+    }
+
+    button,
+    input,
+    select,
+    textarea {
+      font-family: inherit;
+    }
+
+    .page {
+      width: min(calc(100% - 28px), var(--container));
+      margin: 14px auto;
+      display: grid;
+      grid-template-columns: 290px 1fr;
+      gap: 16px;
+      min-height: calc(100vh - 28px);
+    }
+
+    .sidebar {
+      background: rgba(8, 8, 8, 0.9);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow);
+      padding: 18px;
+      position: sticky;
+      top: 14px;
+      height: calc(100vh - 28px);
+      overflow: auto;
+      backdrop-filter: blur(14px);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 8px 4px 18px;
+      border-bottom: 1px solid var(--line);
+      margin-bottom: 18px;
+    }
+
+    .brand-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 18px;
+      display: grid;
+      place-items: center;
+      font-size: 1.1rem;
+      font-weight: 900;
+      background: linear-gradient(135deg, var(--red), var(--red-2));
+      box-shadow: var(--shadow-soft);
+      flex-shrink: 0;
+    }
+
+    .brand-text strong {
+      display: block;
+      font-size: 1.1rem;
+      line-height: 1.4;
+    }
+
+    .brand-text span {
+      display: block;
+      color: var(--muted);
+      font-size: 0.92rem;
+      margin-top: 2px;
+    }
+
+    .nav {
+      display: grid;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .nav a {
+      text-decoration: none;
+      color: var(--text);
+      padding: 14px 16px;
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      font-weight: 700;
+      transition: 0.2s ease;
+    }
+
+    .nav a:hover,
+    .nav a.active {
+      background: rgba(226, 26, 50, 0.14);
+      border-color: rgba(226, 26, 50, 0.24);
+    }
+
+    .side-box {
+      padding: 16px;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      margin-bottom: 12px;
+    }
+
+    .side-box h4 {
+      margin: 0 0 10px;
+      font-size: 1rem;
+    }
+
+    .side-box p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.9;
+      font-size: 0.94rem;
+    }
+
+    .main {
+      display: grid;
+      gap: 16px;
+      align-content: start;
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 14px;
+      padding: 24px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.07), rgba(255,255,255,0.04));
+      border: 1px solid var(--line);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow);
+    }
+
+    .topbar-left h1 {
+      margin: 0;
+      font-size: 2rem;
+      line-height: 1.3;
+    }
+
+    .topbar-left p {
+      margin: 8px 0 0;
+      color: var(--muted);
+      line-height: 1.8;
+    }
+
+    .topbar-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .btn {
+      border: none;
+      cursor: pointer;
+      padding: 13px 16px;
+      border-radius: 14px;
+      font-size: 0.96rem;
+      font-weight: 800;
+      transition: 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+    }
+
+    .btn-primary {
+      color: #fff;
+      background: linear-gradient(135deg, var(--red), var(--red-2));
+      box-shadow: 0 10px 24px rgba(179, 0, 24, 0.28);
+    }
+
+    .btn-secondary {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .btn-green {
+      color: #fff;
+      background: linear-gradient(135deg, #1a9e58, var(--green));
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 14px;
+    }
+
+    .stat-card {
+      padding: 20px;
+      border-radius: var(--radius-lg);
+      background: linear-gradient(180deg, rgba(255,255,255,0.07), rgba(255,255,255,0.04));
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .stat-card span {
+      display: block;
+      color: var(--muted);
+      font-size: 0.94rem;
+      margin-bottom: 10px;
+    }
+
+    .stat-card strong {
+      font-size: 1.9rem;
+      line-height: 1.2;
+    }
+
+    .content-grid {
+      display: grid;
+      grid-template-columns: 1.18fr 0.82fr;
+      gap: 16px;
+    }
+
+    .panel {
+      background: linear-gradient(180deg, rgba(255,255,255,0.07), rgba(255,255,255,0.04));
+      border: 1px solid var(--line);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .panel-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      padding: 20px 20px 10px;
+    }
+
+    .panel-head h2 {
+      margin: 0;
+      font-size: 1.2rem;
+    }
+
+    .panel-head p {
+      margin: 6px 0 0;
+      color: var(--muted);
+      font-size: 0.93rem;
+    }
+
+    .panel-body {
+      padding: 0 20px 20px;
+    }
+
+    .toolbar {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 14px;
+    }
+
+    .input,
+    .select,
+    .textarea {
+      width: 100%;
+      background: rgba(255, 255, 255, 0.05);
+      color: #fff;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 14px;
+      padding: 13px 14px;
+      outline: none;
+      transition: 0.2s ease;
+    }
+
+    .input:focus,
+    .select:focus,
+    .textarea:focus {
+      border-color: rgba(226, 26, 50, 0.7);
+      box-shadow: 0 0 0 4px rgba(226, 26, 50, 0.12);
+    }
+
+    .search {
+      flex: 1;
+      min-width: 220px;
+    }
+
+    .filter {
+      width: 180px;
+    }
+
+    .table-wrap {
+      overflow: auto;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 760px;
+    }
+
+    th,
+    td {
+      text-align: right;
+      padding: 14px 12px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      font-size: 0.95rem;
+      vertical-align: top;
+    }
+
+    th {
+      color: #e3e3e3;
+      font-weight: 800;
+      white-space: nowrap;
+      background: rgba(255, 255, 255, 0.03);
+      position: sticky;
+      top: 0;
+      z-index: 1;
+    }
+
+    tbody tr {
+      transition: 0.15s ease;
+    }
+
+    tbody tr:hover {
+      background: rgba(255, 255, 255, 0.035);
+    }
+
+    tbody tr.active-row {
+      background: rgba(226, 26, 50, 0.08);
+    }
+
+    .cell-title {
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 4px;
+    }
+
+    .cell-sub {
+      color: var(--muted);
+      font-size: 0.88rem;
+      line-height: 1.7;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 7px 12px;
+      border-radius: 999px;
+      font-size: 0.84rem;
+      font-weight: 800;
+      border: 1px solid transparent;
+      white-space: nowrap;
+    }
+
+    .badge-confirmed {
+      background: rgba(42, 184, 111, 0.14);
+      color: #9dffd1;
+      border-color: rgba(42, 184, 111, 0.25);
+    }
+
+    .badge-pending {
+      background: rgba(227, 155, 47, 0.14);
+      color: #ffd898;
+      border-color: rgba(227, 155, 47, 0.25);
+    }
+
+    .badge-cancelled {
+      background: rgba(255, 79, 101, 0.14);
+      color: #ffb1bc;
+      border-color: rgba(255, 79, 101, 0.25);
+    }
+
+    .details-card {
+      padding: 18px;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .details-card h3 {
+      margin: 0 0 12px;
+      font-size: 1.2rem;
+    }
+
+    .details-grid {
+      display: grid;
+      gap: 10px;
+    }
+
+    .detail-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 10px 0;
+      border-bottom: 1px dashed rgba(255,255,255,0.08);
+      line-height: 1.8;
+    }
+
+    .detail-row:last-child {
+      border-bottom: none;
+    }
+
+    .detail-row strong {
+      color: #fff;
+      flex-shrink: 0;
+    }
+
+    .detail-row span {
+      color: var(--muted);
+      text-align: left;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 16px;
+    }
+
+    .small-btn {
+      padding: 10px 12px;
+      border-radius: 12px;
+      cursor: pointer;
+      font-weight: 800;
+      background: rgba(255,255,255,0.06);
+      color: #fff;
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .small-btn.red {
+      background: rgba(226, 26, 50, 0.14);
+      border-color: rgba(226, 26, 50, 0.2);
+    }
+
+    .small-btn.green {
+      background: rgba(42, 184, 111, 0.14);
+      border-color: rgba(42, 184, 111, 0.2);
+    }
+
+    .small-btn.orange {
+      background: rgba(227, 155, 47, 0.14);
+      border-color: rgba(227, 155, 47, 0.2);
+    }
+
+    .receipt-panel {
+      padding: 20px;
+    }
+
+    .receipt-paper {
+      background: var(--receipt-bg);
+      color: var(--receipt-text);
+      border: 1px solid #dcdcdc;
+      border-radius: 22px;
+      padding: 22px;
+      box-shadow: 0 16px 36px rgba(0,0,0,0.08);
+    }
+
+    .receipt-header {
+      text-align: center;
+      border-bottom: 2px solid #111;
+      padding-bottom: 14px;
+      margin-bottom: 14px;
+    }
+
+    .receipt-header h3 {
+      margin: 0;
+      color: #c4001d;
+      font-size: 1.7rem;
+    }
+
+    .receipt-header p {
+      margin: 8px 0 0;
+      color: #444;
+      line-height: 1.8;
+    }
+
+    .receipt-box {
+      border: 1px solid var(--receipt-line);
+      border-radius: 16px;
+      padding: 14px 16px;
+      margin-top: 12px;
+      background: #fff;
+    }
+
+    .receipt-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 14px;
+      padding: 5px 0;
+      line-height: 1.9;
+      border-bottom: 1px dashed #ececec;
+    }
+
+    .receipt-row:last-child {
+      border-bottom: none;
+    }
+
+    .receipt-row strong {
+      flex-shrink: 0;
+    }
+
+    .receipt-stamp {
+      margin-top: 14px;
+      text-align: center;
+      font-size: 1.18rem;
+      font-weight: 900;
+      color: #c4001d;
+    }
+
+    .receipt-qr {
+      text-align: center;
+      margin-top: 16px;
+    }
+
+    .receipt-qr img {
+      width: 120px;
+      height: 120px;
+      object-fit: cover;
+    }
+
+    .receipt-notes {
+      margin-top: 16px;
+      padding: 16px;
+      border-radius: 16px;
+      border: 1px solid #dcdcdc;
+      background: #fcfcfc;
+      color: #222;
+      line-height: 2;
+      font-size: 0.95rem;
+    }
+
+    .receipt-notes strong {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 1rem;
+    }
+
+    .receipt-footer {
+      margin-top: 16px;
+      text-align: center;
+      color: #555;
+      font-size: 0.9rem;
+    }
+
+    .mini-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+
+    .mini-card {
+      padding: 16px;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .mini-card strong {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 1rem;
+    }
+
+    .mini-card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.9;
+    }
+
+    .empty-state {
+      padding: 30px 16px;
+      text-align: center;
+      color: var(--muted);
+      line-height: 2;
+    }
+
+    @media (max-width: 1300px) {
+      .stats-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .mini-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 1150px) {
+      .page {
+        grid-template-columns: 1fr;
+      }
+
+      .sidebar {
+        position: static;
+        height: auto;
+      }
+
+      .content-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 760px) {
+      .topbar {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .topbar-actions {
+        width: 100%;
+      }
+
+      .topbar-actions .btn {
+        flex: 1;
+      }
+
+      .stats-grid,
+      .mini-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .receipt-row,
+      .detail-row {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-icon">ر</div>
+        <div class="brand-text">
+          <strong>أدمن رمال</strong>
+          <span>نسخة كاملة جاهزة للإدارة</span>
+        </div>
+      </div>
+
+      <nav class="nav">
+        <a href="#dashboard" class="active">لوحة التحكم</a>
+        <a href="#bookings-section">الحجوزات</a>
+        <a href="#receipt-section">الوصل</a>
+        <a href="#info-section">معلومات سريعة</a>
+      </nav>
+
+      <div class="side-box">
+        <h4>طريقة العمل</h4>
+        <p>
+          أي حجز جديد ينضاف من موقع العميل يظهر هنا مباشرة، ويمكنك تحديد الحالة وطباعة الوصل والتواصل مع العميل من نفس الصفحة.
+        </p>
+      </div>
+
+      <div class="side-box">
+        <h4>التعليمات</h4>
+        <p>
+          افتح الصفحة واتركها شغالة، و
+        </p>
+      </div>
+    </aside>
+
+    <main class="main">
+      <section class="topbar" id="dashboard">
+        <div class="topbar-left">
+          <h1>لوحة إدارة الحجوزات</h1>
+          <p>
+            متابعة مباشرة للحجوزات، عرض تفاصيل العميل، تحديث الحالة، وطباعة الوصل الرسمي بشكل مرتب وواضح.
+          </p>
+        </div>
+
+        <div class="topbar-actions">
+          <button class="btn btn-secondary" onclick="sendWhatsCurrent()">واتساب العميل</button>
+          <button class="btn btn-primary" onclick="printReceipt()">طباعة الوصل</button>
+          <button class="btn btn-green" onclick="refreshSelection()">تحديث العرض</button>
+        </div>
+      </section>
+
+      <section class="stats-grid">
+        <div class="stat-card">
+          <span>إجمالي الحجوزات</span>
+          <strong id="totalBookings">0</strong>
+        </div>
+
+        <div class="stat-card">
+          <span>الحجوزات المؤكدة</span>
+          <strong id="confirmedBookings">0</strong>
+        </div>
+
+        <div class="stat-card">
+          <span>بانتظار التأكيد</span>
+          <strong id="pendingBookings">0</strong>
+        </div>
+
+        <div class="stat-card">
+          <span>الحجوزات الملغية</span>
+          <strong id="cancelledBookings">0</strong>
+        </div>
+
+        <div class="stat-card">
+          <span>إجمالي العربون</span>
+          <strong id="totalDeposits">0 ريال</strong>
+        </div>
+      </section>
+
+      <section class="content-grid">
+        <div class="panel" id="bookings-section">
+          <div class="panel-head">
+            <div>
+              <h2>الحجوزات الحالية</h2>
+              <p>ابحث عن العميل بالاسم أو التاريخ أو رقم الجوال، واختر الحجز المطلوب لعرض التفاصيل الكاملة.</p>
+            </div>
+          </div>
+
+          <div class="panel-body">
+            <div class="toolbar">
+              <input class="input search" id="searchInput" placeholder="ابحث باسم العميل أو التاريخ أو الجوال" />
+              <select class="select filter" id="statusFilter">
+                <option value="all">كل الحالات</option>
+                <option value="confirmed">مؤكد</option>
+                <option value="pending">بانتظار</option>
+                <option value="cancelled">ملغي</option>
+              </select>
+            </div>
+
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>العميل</th>
+                    <th>التاريخ</th>
+                    <th>المدة</th>
+                    <th>نوع اليوم</th>
+                    <th>السعر</th>
+                    <th>العربون</th>
+                    <th>الحالة</th>
+                  </tr>
+                </thead>
+                <tbody id="bookingsTable"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-head">
+            <div>
+              <h2>تفاصيل الحجز المحدد</h2>
+              <p>حدد أي صف من الجدول لعرض تفاصيله هنا، ثم استخدم الأزرار السريعة لتغيير الحالة.</p>
+            </div>
+          </div>
+
+          <div class="panel-body">
+            <div id="detailsBox"></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel" id="receipt-section">
+        <div class="panel-head">
+          <div>
+            <h2>وصل الحجز</h2>
+            <p>هذا هو الوصل الرسمي المرتبط بالحجز المحدد، ويمكن طباعته أو حفظه PDF مباشرة.</p>
+          </div>
+        </div>
+
+        <div class="receipt-panel">
+          <div id="receiptPreview"></div>
+        </div>
+      </section>
+
+      <section class="mini-grid" id="info-section">
+        <div class="mini-card">
+          <strong>تأكيد الحجز</strong>
+          <p>
+            لا يتم تأكيد الحجز إلا بعد دفع العربون، ويمكن تعديل الحالة من نفس لوحة التحكم بضغطه واحدة.
+          </p>
+        </div>
+
+        <div class="mini-card">
+          <strong>التأمين</strong>
+          <p>
+            التأمين 500 ريال ويدفع قبل الدخول، ويُسترجع عند سلامة محتويات المنتجع وعدم وجود أضرار أو ملاحظات.
+          </p>
+        </div>
+
+        <div class="mini-card">
+          <strong>التواصل</strong>
+          <p>
+            زر واتساب العميل يرسل له تحديثًا مباشرًا عن حالة الحجز من داخل لوحة الأدمن بشكل سريع وواضح.
+          </p>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import {
+      getFirestore,
+      collection,
+      doc,
+      updateDoc,
+      onSnapshot
+    } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyBrsONe6O8Uqsczbuz3aBQyhfU2I9lfMAo",
+      authDomain: "alrimal2.firebaseapp.com",
+      projectId: "alrimal2",
+      storageBucket: "alrimal2.firebasestorage.app",
+      messagingSenderId: "886389694053",
+      appId: "1:886389694053:web:f03c204e9557d00778308c"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    let allBookings = [];
+    let selectedId = null;
+
+    function getStatusBadge(status) {
+      if (status === 'confirmed') {
+        return '<span class="badge badge-confirmed">مؤكد</span>';
+      }
+
+      if (status === 'pending') {
+        return '<span class="badge badge-pending">بانتظار</span>';
+      }
+
+      return '<span class="badge badge-cancelled">ملغي</span>';
+    }
+
+    function getStatusText(status) {
+      if (status === 'confirmed') {
+        return 'مؤكد';
+      }
+
+      if (status === 'pending') {
+        return 'بانتظار';
+      }
+
+      return 'ملغي';
+    }
+
+    function getStamp(status) {
+      if (status === 'confirmed') {
+        return '✔ تم التأكيد';
+      }
+
+      if (status === 'pending') {
+        return '⏳ بانتظار التأكيد';
+      }
+
+      return '✖ ملغي';
+    }
+
+    function getCurrentBooking() {
+      return allBookings.find(item => item.id === selectedId) || null;
+    }
+
+    function normalizePhone(rawPhone) {
+      const value = String(rawPhone || '').trim();
+
+      if (!value) {
+        return '';
+      }
+
+      if (value.startsWith('966')) {
+        return value;
+      }
+
+      if (value.startsWith('0')) {
+        return '966' + value.slice(1);
+      }
+
+      return value;
+    }
+
+    function renderStats() {
+      const confirmedCount = allBookings.filter(item => item.status === 'confirmed').length;
+      const pendingCount = allBookings.filter(item => item.status === 'pending').length;
+      const cancelledCount = allBookings.filter(item => item.status === 'cancelled').length;
+      const totalDeposits = allBookings.reduce((sum, item) => sum + Number(item.deposit || 0), 0);
+
+      document.getElementById('totalBookings').textContent = allBookings.length;
+      document.getElementById('confirmedBookings').textContent = confirmedCount;
+      document.getElementById('pendingBookings').textContent = pendingCount;
+      document.getElementById('cancelledBookings').textContent = cancelledCount;
+      document.getElementById('totalDeposits').textContent = totalDeposits + ' ريال';
+    }
+
+    function renderTable() {
+      const queryText = document.getElementById('searchInput').value.trim();
+      const statusFilter = document.getElementById('statusFilter').value;
+
+      const filteredRows = allBookings.filter(item => {
+        const matchesQuery =
+          !queryText ||
+          (item.name || '').includes(queryText) ||
+          (item.date || '').includes(queryText) ||
+          (item.phone || '').includes(queryText);
+
+        const matchesStatus = statusFilter === 'all' || (item.status || 'pending') === statusFilter;
+
+        return matchesQuery && matchesStatus;
+      });
+
+      if (!filteredRows.length) {
+        document.getElementById('bookingsTable').innerHTML = `
+          <tr>
+            <td colspan="7">
+              <div class="empty-state">لا توجد حجوزات مطابقة للبحث الحالي.</div>
+            </td>
+          </tr>
+        `;
+        return;
+      }
+
+      document.getElementById('bookingsTable').innerHTML = filteredRows.map(item => `
+        <tr
+          onclick="window.selectBooking('${item.id}')"
+          class="${selectedId === item.id ? 'active-row' : ''}"
+          style="cursor:pointer;"
+        >
+          <td>
+            <div class="cell-title">${item.name || '-'}</div>
+            <div class="cell-sub">${item.phone || '-'}</div>
+          </td>
+          <td>${item.date || '-'}</td>
+          <td>${item.duration || '-'}</td>
+          <td>${item.dayType || '-'}</td>
+          <td>${item.price || 0} ريال</td>
+          <td>${item.deposit || 0} ريال</td>
+          <td>${getStatusBadge(item.status || 'pending')}</td>
+        </tr>
+      `).join('');
+    }
+
+    function renderDetails() {
+      const booking = getCurrentBooking();
+
+      if (!booking) {
+        document.getElementById('detailsBox').innerHTML = `
+          <div class="empty-state">
+            اختر أي حجز من الجدول لعرض التفاصيل الكاملة هنا.
+          </div>
+        `;
+        return;
+      }
+
+      const remaining = booking.remaining ?? Math.max((booking.price || 0) - (booking.deposit || 0), 0);
+
+      document.getElementById('detailsBox').innerHTML = `
+        <div class="details-card">
+          <h3>${booking.name || '-'}</h3>
+
+          <div class="details-grid">
+            <div class="detail-row">
+              <strong>رقم الجوال</strong>
+              <span>${booking.phone || '-'}</span>
+            </div>
+
+            <div class="detail-row">
+              <strong>التاريخ</strong>
+              <span>${booking.date || '-'}</span>
+            </div>
+
+            <div class="detail-row">
+              <strong>المدة</strong>
+              <span>${booking.duration || '-'}</span>
+            </div>
+
+            <div class="detail-row">
+              <strong>نوع اليوم</strong>
+              <span>${booking.dayType || '-'}</span>
+            </div>
+
+            <div class="detail-row">
+              <strong>السعر</strong>
+              <span>${booking.price || 0} ريال</span>
+            </div>
+
+            <div class="detail-row">
+              <strong>العربون</strong>
+              <span>${booking.deposit || 0} ريال</span>
+            </div>
+
+            <div class="detail-row">
+              <strong>المتبقي</strong>
+              <span>${remaining} ريال</span>
+            </div>
+
+            <div class="detail-row">
+              <strong>الحالة</strong>
+              <span>${getStatusText(booking.status || 'pending')}</span>
+            </div>
+
+            <div class="detail-row">
+              <strong>الملاحظات</strong>
+              <span>${booking.notes || 'لا يوجد'}</span>
+            </div>
+          </div>
+
+          <div class="actions">
+            <button class="small-btn green" onclick="window.updateStatus('${booking.id}', 'confirmed')">تأكيد الحجز</button>
+            <button class="small-btn orange" onclick="window.updateStatus('${booking.id}', 'pending')">إرجاعه لانتظار</button>
+            <button class="small-btn red" onclick="window.updateStatus('${booking.id}', 'cancelled')">إلغاء الحجز</button>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderReceipt() {
+      const booking = getCurrentBooking();
+
+      if (!booking) {
+        document.getElementById('receiptPreview').innerHTML = `
+          <div class="receipt-paper">
+            <div class="empty-state" style="color:#666;">
+              اختر أي حجز من الجدول ليظهر الوصل هنا.
+            </div>
+          </div>
+        `;
+        return;
+      }
+
+      const remaining = booking.remaining ?? Math.max((booking.price || 0) - (booking.deposit || 0), 0);
+      const qrData = `receipt:${booking.receiptNo}|name:${booking.name}|date:${booking.date}|price:${booking.price}`;
+
+      document.getElementById('receiptPreview').innerHTML = `
+        <div class="receipt-paper">
+          <div class="receipt-header">
+            <h3>منتجع ومخيم الرمال</h3>
+            <p>
+              الأحساء - بريقا<br>
+              رقم الوصل: ${booking.receiptNo}
+            </p>
+          </div>
+
+          <div class="receipt-box">
+            <div class="receipt-row">
+              <strong>الاسم</strong>
+              <span>${booking.name || '-'}</span>
+            </div>
+
+            <div class="receipt-row">
+              <strong>الجوال</strong>
+              <span>${booking.phone || '-'}</span>
+            </div>
+
+            <div class="receipt-row">
+              <strong>التاريخ</strong>
+              <span>${booking.date || '-'}</span>
+            </div>
+
+            <div class="receipt-row">
+              <strong>المدة</strong>
+              <span>${booking.duration || '-'}</span>
+            </div>
+
+            <div class="receipt-row">
+              <strong>نوع اليوم</strong>
+              <span>${booking.dayType || '-'}</span>
+            </div>
+
+            <div class="receipt-row">
+              <strong>الحالة</strong>
+              <span>${getStatusText(booking.status || 'pending')}</span>
+            </div>
+          </div>
+
+          <div class="receipt-box">
+            <div class="receipt-row">
+              <strong>السعر</strong>
+              <span>${booking.price || 0} ريال</span>
+            </div>
+
+            <div class="receipt-row">
+              <strong>المتبقي</strong>
+              <span>${remaining} ريال</span>
+            </div>
+          </div>
+
+          <div class="receipt-stamp">${getStamp(booking.status || 'pending')}</div>
+
+          
+
+          <div class="receipt-notes">
+            <strong>الشروط والتعليمات:</strong>
+            • لن يتم تأكيد الحجز إلا بعد دفع العربون.<br>
+            • يتم دفع باقي المبلغ والتأمين 500 ريال عند الدخول.<br>
+            • التأمين 500 ريال ويدفع قبل الدخول ويُسترجع في حال سلامة محتويات المنتجع.<br>
+            • يجب مراقبة الأطفال في المسبح وحوله مع العلم أن عمق المسبح 2 متر.<br>
+            • يجب المحافظة على محتويات المنتجع ويتحمل المستأجر أي أضرار.<br>
+            • يخصم 100 ريال في حال عدم نظافة المنتجع.<br>
+            • العربون لا يُسترجع في حال إلغاء الحجز.<br>
+            • لا يسمح بإخراج الفرش أو الأثاث للخارج.<br>
+            • نتمنى لكم إقامة سعيدة.
+          </div>
+
+          <div class="receipt-footer">
+            هذا الوصل صادر من إدارة المنتجع.
+          </div>
+        </div>
+      `;
+    }
+
+    function renderAll() {
+      renderStats();
+      renderTable();
+      renderDetails();
+      renderReceipt();
+    }
+
+    function subscribeToBookings() {
+      const bookingsRef = collection(db, 'bookings');
+
+      onSnapshot(
+        bookingsRef,
+        (snapshot) => {
+          allBookings = snapshot.docs.map((docItem, index) => ({
+            receiptNo: index + 1,
+            id: docItem.id,
+            ...docItem.data()
+          }));
+
+          allBookings.sort((a, b) => (a.date || '').localeCompare(b.date || ''));
+
+          if (!allBookings.length) {
+            selectedId = null;
+          } else if (!selectedId || !allBookings.find(item => item.id === selectedId)) {
+            selectedId = allBookings[0].id;
+          }
+
+          renderAll();
+        },
+        (error) => {
+          console.error('Realtime error:', error);
+          alert('صار خطأ في قراءة الحجوزات');
+        }
+      );
+    }
+
+    window.selectBooking = function(id) {
+      selectedId = id;
+      renderAll();
+    };
+
+    window.updateStatus = async function(id, status) {
+      try {
+        await updateDoc(doc(db, 'bookings', id), { status });
+      } catch (error) {
+        console.error(error);
+        alert('تعذر تحديث الحالة');
+      }
+    };
+
+    window.sendWhatsCurrent = function() {
+      const booking = getCurrentBooking();
+
+      if (!booking) {
+        return;
+      }
+
+      const cleanPhone = normalizePhone(booking.phone);
+      const msg = `السلام عليكم ${booking.name}، حالة حجزك في منتجع ومخيم الرمال: ${getStatusText(booking.status || 'pending')}.`;
+      window.open(`https://wa.me/${cleanPhone}?text=${encodeURIComponent(msg)}`, '_blank');
+    };
+
+    window.printReceipt = function() {
+      const booking = getCurrentBooking();
+
+      if (!booking) {
+        return;
+      }
+
+      const remaining = booking.remaining ?? Math.max((booking.price || 0) - (booking.deposit || 0), 0);
+      const qrData = `receipt:${booking.receiptNo}|name:${booking.name}|date:${booking.date}|price:${booking.price}`;
+      const receiptWindow = window.open('', '_blank');
+
+      receiptWindow.document.write(`
+        <html dir="rtl">
+        <head>
+          <title>وصل حجز</title>
+          <style>
+            body {
+              font-family: Arial, sans-serif;
+              padding: 30px;
+              background: #fff;
+              color: #000;
+            }
+            .header {
+              text-align: center;
+              border-bottom: 2px solid #111;
+              padding-bottom: 12px;
+              margin-bottom: 14px;
+            }
+            .header h1 {
+              color: #c4001d;
+              margin: 0;
+            }
+            .box {
+              border: 1px solid #d7d7d7;
+              padding: 15px;
+              margin-top: 15px;
+              border-radius: 12px;
+            }
+            .row {
+              display: flex;
+              justify-content: space-between;
+              gap: 12px;
+              padding: 4px 0;
+              border-bottom: 1px dashed #ececec;
+            }
+            .row:last-child {
+              border-bottom: none;
+            }
+            .stamp {
+              color: #c4001d;
+              font-size: 20px;
+              text-align: center;
+              margin-top: 12px;
+              font-weight: bold;
+            }
+            .notes {
+              margin-top: 15px;
+              border: 1px solid #d7d7d7;
+              border-radius: 12px;
+              padding: 15px;
+              line-height: 2;
+            }
+            .footer {
+              text-align: center;
+              margin-top: 18px;
+              color: #555;
+            }
+          </style>
+        </head>
+        <body>
+          <div class="header">
+            <h1>منتجع ومخيم الرمال</h1>
+            <p>الأحساء - بريقا</p>
+            <p>رقم الوصل: ${booking.receiptNo}</p>
+          </div>
+
+          <div class="box">
+            <div class="row"><span>الاسم:</span><span>${booking.name || '-'}</span></div>
+            <div class="row"><span>الجوال:</span><span>${booking.phone || '-'}</span></div>
+            <div class="row"><span>التاريخ:</span><span>${booking.date || '-'}</span></div>
+            <div class="row"><span>المدة:</span><span>${booking.duration || '-'}</span></div>
+            <div class="row"><span>نوع اليوم:</span><span>${booking.dayType || '-'}</span></div>
+            <div class="row"><span>الحالة:</span><span>${getStatusText(booking.status || 'pending')}</span></div>
+          </div>
+
+          <div class="box">
+            <div class="row"><span>السعر:</span><span>${booking.price || 0} ريال</span></div>
+            <div class="row"><span>المتبقي:</span><span>${remaining} ريال</span></div>
+          </div>
+
+          <div class="stamp">${getStamp(booking.status || 'pending')}</div>
+
+          <div style="text-align:center;margin-top:16px">
+            <img src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=${encodeURIComponent(qrData)}" />
+          </div>
+
+          <div class="notes">
+            <strong>الشروط والتعليمات:</strong><br>
+            • لن يتم تأكيد الحجز إلا بعد دفع العربون.<br>
+            • يتم دفع باقي المبلغ والتأمين 500 ريال عند الدخول.<br>
+            • التأمين 500 ريال ويدفع قبل الدخول ويُسترجع في حال سلامة محتويات المنتجع.<br>
+            • يجب مراقبة الأطفال في المسبح وحوله مع العلم أن عمق المسبح 2 متر.<br>
+            • يجب المحافظة على محتويات المنتجع ويتحمل المستأجر أي أضرار.<br>
+            • يخصم 100 ريال في حال عدم نظافة المنتجع.<br>
+            • العربون لا يُسترجع في حال إلغاء الحجز.<br>
+            • لا يسمح بإخراج الفرش أو الأثاث للخارج.<br>
+            • نتمنى لكم إقامة سعيدة.
+          </div>
+
+          <div class="footer">هذا الوصل صادر من إدارة المنتجع.</div>
+        </body>
+        </html>
+      `);
+
+      receiptWindow.document.close();
+      receiptWindow.print();
+    };
+
+    window.refreshSelection = function() {
+      renderAll();
+    };
+
+    document.getElementById('searchInput').addEventListener('input', renderTable);
+    document.getElementById('statusFilter').addEventListener('change', renderTable);
+
+    subscribeToBookings();
+  </script>
+</body>
+</html>

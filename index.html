@@ -1,0 +1,1063 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>منتجع ومخيم رمال</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #070707;
+      --bg-soft: #101010;
+      --panel: rgba(255,255,255,0.06);
+      --panel-strong: rgba(255,255,255,0.10);
+      --line: rgba(255,255,255,0.10);
+      --text: #ffffff;
+      --muted: #cfcfcf;
+      --red: #b30018;
+      --red-2: #e21a32;
+      --gold: #f2d18b;
+      --green: #38c172;
+      --orange: #ffb347;
+      --shadow: 0 18px 50px rgba(0,0,0,0.45);
+      --radius: 26px;
+      --radius-sm: 18px;
+      --container: 1200px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: 'Tajawal', sans-serif;
+      background:
+        radial-gradient(circle at top right, rgba(226,26,50,0.16), transparent 25%),
+        radial-gradient(circle at bottom left, rgba(179,0,24,0.18), transparent 30%),
+        linear-gradient(180deg, #080808 0%, #0d0d0d 100%);
+      color: var(--text);
+    }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    .container {
+      width: min(100% - 32px, var(--container));
+      margin-inline: auto;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(14px);
+      background: rgba(8,8,8,0.84);
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 14px 0;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 900;
+      font-size: 1.08rem;
+    }
+
+    .brand-badge {
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, var(--red), var(--red-2));
+      box-shadow: var(--shadow);
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+
+    .menu {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .menu a {
+      padding: 10px 14px;
+      border-radius: 999px;
+      color: var(--muted);
+      transition: .25s ease;
+      font-weight: 700;
+    }
+
+    .menu a:hover {
+      background: rgba(255,255,255,0.06);
+      color: var(--text);
+    }
+
+    .hero {
+      padding: 74px 0 32px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.08fr .92fr;
+      gap: 24px;
+      align-items: stretch;
+    }
+
+    .card,
+    .hero-card,
+    .panel,
+    .service-card,
+    .price-card,
+    .day-card,
+    .form-card,
+    .contact-card,
+    .gallery-card,
+    .policy-card {
+      background: linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.04));
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-card {
+      padding: 36px;
+      position: relative;
+      overflow: hidden;
+      min-height: 520px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .hero-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(135deg, rgba(226,26,50,.18), transparent 42%),
+        radial-gradient(circle at 85% 20%, rgba(255,255,255,.08), transparent 18%);
+      pointer-events: none;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      width: fit-content;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.08);
+      color: var(--gold);
+      font-weight: 800;
+      margin-bottom: 16px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(2.1rem, 4vw, 4.2rem);
+      line-height: 1.08;
+      font-weight: 900;
+      max-width: 680px;
+    }
+
+    .hero p {
+      color: #dfdfdf;
+      font-size: 1.08rem;
+      line-height: 1.95;
+      margin: 18px 0 0;
+      max-width: 670px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    .btn {
+      border: none;
+      cursor: pointer;
+      padding: 14px 20px;
+      border-radius: 16px;
+      font-family: inherit;
+      font-size: 1rem;
+      font-weight: 800;
+      transition: .25s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--red), var(--red-2));
+      color: #fff;
+      box-shadow: 0 10px 28px rgba(179,0,24,.35);
+    }
+
+    .btn-primary:hover { transform: translateY(-2px); }
+
+    .btn-secondary {
+      background: rgba(255,255,255,0.07);
+      color: var(--text);
+      border: 1px solid rgba(255,255,255,.10);
+    }
+
+    .btn-full { width: 100%; }
+
+    .hero-badges {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin-top: 26px;
+    }
+
+    .badge {
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 18px;
+      padding: 16px;
+      text-align: center;
+      color: #f2f2f2;
+      font-weight: 700;
+    }
+
+    .hero-side {
+      display: grid;
+      gap: 18px;
+    }
+
+    .gallery-card {
+      padding: 22px;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap: 12px;
+      min-height: 430px;
+    }
+
+    .gallery-main,
+    .gallery-side {
+      display: grid;
+      gap: 12px;
+    }
+
+    .gallery-side {
+      grid-template-columns: 1fr 1fr;
+      grid-auto-rows: 1fr;
+    }
+
+    .gallery-item {
+      border-radius: 22px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.08);
+      position: relative;
+      min-height: 130px;
+      background: #111;
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .gallery-item::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 40%, rgba(0,0,0,.30));
+      pointer-events: none;
+    }
+
+    .quick-info {
+      padding: 22px;
+      display: grid;
+      grid-template-columns: repeat(2,1fr);
+      gap: 12px;
+    }
+
+    .quick-info .item {
+      padding: 16px;
+      border-radius: 18px;
+      background: rgba(255,255,255,.05);
+      border: 1px solid rgba(255,255,255,.08);
+    }
+
+    .quick-info .item span {
+      display: block;
+      color: var(--muted);
+      font-size: .93rem;
+      margin-bottom: 6px;
+    }
+
+    .quick-info .item strong {
+      font-size: 1.05rem;
+    }
+
+    section { padding: 28px 0; }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+
+    .section-head h2 {
+      margin: 0;
+      font-size: clamp(1.5rem, 3vw, 2.3rem);
+      font-weight: 900;
+    }
+
+    .section-head p {
+      margin: 8px 0 0;
+      color: var(--muted);
+      line-height: 1.8;
+      max-width: 680px;
+    }
+
+    .services-grid,
+    .pricing-grid,
+    .availability-grid,
+    .policy-grid {
+      display: grid;
+      gap: 16px;
+    }
+
+    .services-grid { grid-template-columns: repeat(4,1fr); }
+    .pricing-grid { grid-template-columns: repeat(2,1fr); }
+    .availability-grid { grid-template-columns: repeat(4,1fr); }
+    .policy-grid { grid-template-columns: repeat(3,1fr); }
+
+    .service-card,
+    .price-card,
+    .day-card,
+    .policy-card { padding: 22px; }
+
+    .service-icon {
+      width: 54px;
+      height: 54px;
+      display: grid;
+      place-items: center;
+      border-radius: 18px;
+      background: linear-gradient(135deg, rgba(226,26,50,.22), rgba(179,0,24,.26));
+      margin-bottom: 14px;
+      font-size: 1.08rem;
+      font-weight: 900;
+    }
+
+    .service-card h3,
+    .price-card h3,
+    .form-card h3,
+    .contact-card h3,
+    .policy-card h3 {
+      margin: 0 0 10px;
+      font-size: 1.18rem;
+      font-weight: 800;
+    }
+
+    .service-card p,
+    .day-card p,
+    .muted,
+    .form-hint,
+    .policy-card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.8;
+    }
+
+    .price-card {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .price-card::before {
+      content: "";
+      position: absolute;
+      inset: auto auto -50px -50px;
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      background: rgba(226,26,50,.10);
+      filter: blur(8px);
+    }
+
+    .price-label {
+      display: inline-block;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.07);
+      color: var(--gold);
+      font-weight: 700;
+      margin-bottom: 14px;
+    }
+
+    .price-list {
+      display: grid;
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .price-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 14px 16px;
+      border-radius: 16px;
+      background: rgba(255,255,255,.05);
+      border: 1px solid rgba(255,255,255,.08);
+      font-weight: 700;
+    }
+
+    .price-row span:last-child {
+      color: #fff;
+      font-weight: 900;
+    }
+
+    .day-card {
+      text-align: center;
+    }
+
+    .day-card strong {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 1.06rem;
+    }
+
+    .status {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-size: .92rem;
+      font-weight: 800;
+      margin-top: 10px;
+    }
+
+    .status.available {
+      background: rgba(54,179,91,.14);
+      color: #88ffac;
+      border: 1px solid rgba(54,179,91,.22);
+    }
+
+    .status.booked {
+      background: rgba(226,26,50,.14);
+      color: #ff9aaa;
+      border: 1px solid rgba(226,26,50,.22);
+    }
+
+    .status.pending {
+      background: rgba(245,176,65,.14);
+      color: #ffd58a;
+      border: 1px solid rgba(245,176,65,.22);
+    }
+
+    .booking-wrap {
+      display: grid;
+      grid-template-columns: 1.12fr .88fr;
+      gap: 18px;
+      align-items: start;
+    }
+
+    .form-card,
+    .contact-card {
+      padding: 24px;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(2,1fr);
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    .field {
+      display: grid;
+      gap: 8px;
+    }
+
+    .field.full { grid-column: 1 / -1; }
+
+    label {
+      font-size: .98rem;
+      color: #efefef;
+      font-weight: 700;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.05);
+      color: white;
+      border-radius: 16px;
+      padding: 14px 15px;
+      font-family: inherit;
+      font-size: 1rem;
+      outline: none;
+      transition: border-color .2s ease, transform .2s ease;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      border-color: rgba(226,26,50,.85);
+      transform: translateY(-1px);
+    }
+
+    textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    .addons-box {
+      margin-top: 16px;
+      padding: 16px;
+      border-radius: 18px;
+      background: rgba(255,255,255,.05);
+      border: 1px solid rgba(255,255,255,.08);
+    }
+
+    .addon-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: center;
+      color: var(--muted);
+      line-height: 1.8;
+    }
+
+    .price-preview {
+      margin-top: 18px;
+      padding: 16px 18px;
+      border-radius: 18px;
+      background: linear-gradient(135deg, rgba(179,0,24,.16), rgba(255,255,255,.04));
+      border: 1px solid rgba(226,26,50,.24);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      font-weight: 800;
+    }
+
+    .price-preview strong {
+      font-size: 1.3rem;
+      color: var(--gold);
+    }
+
+    .notice {
+      margin-top: 14px;
+      padding: 14px 16px;
+      border-radius: 16px;
+      background: rgba(255,255,255,.05);
+      border: 1px dashed rgba(255,255,255,.14);
+      color: var(--muted);
+      line-height: 1.8;
+    }
+
+    .success-message {
+      display: none;
+      margin-top: 14px;
+      padding: 14px 16px;
+      border-radius: 16px;
+      background: rgba(56,193,114,.12);
+      border: 1px solid rgba(56,193,114,.25);
+      color: #a8ffd0;
+      line-height: 1.8;
+      font-weight: 700;
+    }
+
+    .form-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .contact-list {
+      display: grid;
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .contact-item {
+      padding: 14px 16px;
+      border-radius: 18px;
+      background: rgba(255,255,255,.05);
+      border: 1px solid rgba(255,255,255,.08);
+      line-height: 1.8;
+    }
+
+    .footer {
+      padding: 24px 0 42px;
+      color: var(--muted);
+    }
+
+    .foot {
+      border-top: 1px solid rgba(255,255,255,.08);
+      padding-top: 22px;
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .float-whatsapp {
+      position: fixed;
+      left: 18px;
+      bottom: 18px;
+      z-index: 60;
+      width: 62px;
+      height: 62px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      font-size: 1.45rem;
+      background: linear-gradient(135deg, var(--red), var(--red-2));
+      box-shadow: 0 12px 26px rgba(179,0,24,.38);
+      border: 1px solid rgba(255,255,255,.14);
+    }
+
+    @media (max-width: 1080px) {
+      .hero-grid,
+      .booking-wrap {
+        grid-template-columns: 1fr;
+      }
+      .services-grid { grid-template-columns: repeat(3,1fr); }
+      .availability-grid { grid-template-columns: repeat(3,1fr); }
+      .policy-grid { grid-template-columns: 1fr 1fr; }
+      .gallery-grid { grid-template-columns: 1fr; min-height: auto; }
+      .gallery-side { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 760px) {
+      .nav { flex-direction: column; align-items: stretch; }
+      .menu { justify-content: center; }
+      .hero-card { padding: 24px; min-height: auto; }
+      .hero-badges,
+      .services-grid,
+      .pricing-grid,
+      .quick-info,
+      .form-grid,
+      .availability-grid,
+      .policy-grid,
+      .gallery-side {
+        grid-template-columns: 1fr;
+      }
+      .section-head { align-items: start; }
+      .price-preview, .addon-row { flex-direction: column; align-items: start; }
+      .foot { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <div class="container nav">
+      <a href="#top" class="brand">
+        <div class="brand-badge">ر</div>
+        <div>منتجع ومخيم رمال</div>
+      </a>
+      <div class="menu">
+        <a href="#services">الخدمات</a>
+        <a href="#prices">الأسعار</a>
+        <a href="#availability">المواعيد</a>
+        <a href="#booking">الحجز</a>
+        <a href="#contact">التواصل</a>
+      </div>
+    </div>
+  </div>
+
+  <main id="top">
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-card">
+          <div class="eyebrow">خصوصية • راحة • حجز سريع</div>
+          <h1>منتجع ومخيم رمال<br></h1>
+          <p>
+            منتجع ومخيم الرمال يوفّر أجواء راقية وجلسات مميزة للعائلة والأصدقاء، مع أسعار واضحة،
+            خدمات متكاملة، ومواعيد تظهر مباشرة حسب حالة الحجز.
+          </p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#booking">ابدأ الحجز الآن</a>
+            <a class="btn btn-secondary" target="_blank" href="https://wa.me/966556662246?text=%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%20%D8%B9%D9%84%D9%8A%D9%83%D9%85%D8%8C%20%D8%A3%D8%A8%D9%8A%20%D8%A7%D9%84%D8%A7%D8%B3%D8%AA%D9%81%D8%B3%D8%A7%D8%B1%20%D8%B9%D9%86%20%D8%A7%D9%84%D8%AD%D8%AC%D8%B2%20%D9%81%D9%8A%20%D9%85%D9%86%D8%AA%D8%AC%D8%B9%20%D9%88%D9%85%D8%AE%D9%8A%D9%85%20%D8%A7%D9%84%D8%B1%D9%85%D8%A7%D9%84">تواصل واتساب</a>
+          </div>
+          <div class="hero-badges">
+            
+            <div class="badge">أسعار واضحة</div>
+            <div class="badge">تأكيد سريع</div>
+            <div class="badge">حجز مباشر</div>
+          </div>
+        </div>
+
+        <div class="hero-side">
+          <div class="gallery-card">
+            <div class="gallery-grid">
+              <div class="gallery-main">
+                <div class="gallery-item"><img src="images/hero.jpg" alt="صورة رئيسية"></div>
+              </div>
+              <div class="gallery-side">
+                <div class="gallery-item"><img src="images/chair.jpg" alt="صورة كرسي معلق"></div>
+                <div class="gallery-item"><img src="images/night.jpg" alt="صورة ليلية"></div>
+                <div class="gallery-item"><img src="images/majlis1.jpg" alt="صورة مجلس"></div>
+                <div class="gallery-item"><img src="images/hero (2).jpg" alt="صورة إضافية"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="panel quick-info">
+            <div class="item">
+              <span>رقم الواتساب</span>
+              <strong>0556662246</strong>
+            </div>
+            <div class="item">
+              <span>نمط الحجز</span>
+              <strong>12 ساعة / 24 ساعة</strong>
+            </div>
+            <div class="item">
+              <span>أفضل سعر</span>
+              <strong>800 ريال</strong>
+            </div>
+            <div class="item">
+              <span>إضافة خاصة</span>
+              <strong>ملعب صابوني 150 ريال</strong>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="services">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2>الخدمات والمرافق</h2>
+            <p>كل ما يحتاجه العميل داخل المنتجع بشكل مرتب وواضح.</p>
+          </div>
+        </div>
+        <div class="services-grid">
+          <div class="service-card"><h3>مجلس رجال</h3><p>جلسة مرتبة ومريحة تناسب الاستقبال والضيافة.</p></div>
+          <div class="service-card"><h3>مجلس حريم</h3><p>خصوصية عالية ومساحة مناسبة للعائلة والجلسات الهادئة.</p></div>
+          <div class="service-card"><h3>مطبخ</h3><p>مطبخ مجهز يساعدكم على التحضير بسهولة أثناء فترة الحجز.</p></div>
+          <div class="service-card"><h3>ملعب</h3><p>مساحة مناسبة للعب والأنشطة والحركة داخل المنتجع.</p></div>
+          <div class="service-card"><h3>مسبح</h3><p>أجواء منعشة وتجربة ممتعة تناسب الاسترخاء والراحة.</p></div>
+          <div class="service-card"><h3>ألعاب مائية</h3><p>إضافة ممتعة تعطي جوًا ترفيهيًا مميزًا داخل الحجز.</p></div>
+          <div class="service-card"><h3>ألعاب أطفال</h3><p>خيارات مناسبة للصغار لزيادة المتعة وراحة العائلة.</p></div>
+          <div class="service-card"><h3>ملعب صابوني</h3><p>إضافة خاصة بقيمة 150 ريال، وتتوفر فقط بعد وجود حجز مؤكد.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="prices">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2>الأسعار</h2>
+            <p>الأسعار مرتبة حسب مدة الحجز ونوع اليوم.</p>
+          </div>
+        </div>
+        <div class="pricing-grid">
+          <div class="price-card">
+            <div class="price-label">حجز 12 ساعة</div>
+            <h3>أسعار نصف يوم</h3>
+            <div class="price-list">
+              <div class="price-row"><span>وسط الأسبوع</span><span>800 ريال</span></div>
+              <div class="price-row"><span>نهاية الأسبوع</span><span>950 ريال</span></div>
+              <div class="price-row"><span>الأعياد</span><span>1200 ريال</span></div>
+            </div>
+          </div>
+          <div class="price-card">
+            <div class="price-label">حجز 24 ساعة</div>
+            <h3>أسعار يوم كامل</h3>
+            <div class="price-list">
+              <div class="price-row"><span>وسط الأسبوع</span><span>1300 ريال</span></div>
+              <div class="price-row"><span>نهاية الأسبوع</span><span>1700 ريال</span></div>
+              <div class="price-row"><span>الأعياد</span><span>2200 ريال</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2>سياسة الحجز</h2>
+            <p>معلومات واضحة للعميل قبل إرسال الطلب.</p>
+          </div>
+        </div>
+        <div class="policy-grid">
+          <div class="policy-card"><h3>تأكيد الحجز</h3><p>يتم رفع الطلب أولًا ثم مراجعة الحجز من الإدارة وتأكيده حسب توفر التاريخ.</p></div>
+          <div class="policy-card"><h3>العربون</h3><p>يمكن كتابة العربون داخل النموذج، وسيظهر المتبقي بشكل تلقائي قبل الإرسال.</p></div>
+          <div class="policy-card"><h3>الإضافات</h3><p>الملعب الصابوني خدمة إضافية بقيمة 150 ريال، ولا يتم تفعيله إلا بعد تأكيد الحجز.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="availability">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2>المواعيد الحالية</h2>
+            <p>الحالة تظهر مباشرة حسب البيانات الموجودة في قاعدة الحجوزات.</p>
+          </div>
+        </div>
+        <div class="availability-grid" id="availabilityGrid"></div>
+      </div>
+    </section>
+
+    <section id="booking">
+      <div class="container booking-wrap">
+        <div class="form-card">
+          <h3>طلب حجز جديد</h3>
+          <p class="form-hint">أدخل البيانات بدقة، ثم سيتم حفظ الطلب وتجهيز رسالة واتساب مباشرة.</p>
+
+          <form id="bookingForm">
+            <div class="form-grid">
+              <div class="field">
+                <label for="name">الاسم</label>
+                <input id="name" name="name" type="text" placeholder="اكتب الاسم" required>
+              </div>
+
+              <div class="field">
+                <label for="phone">رقم الجوال</label>
+                <input id="phone" name="phone" type="tel" placeholder="05xxxxxxxx" required>
+              </div>
+
+              <div class="field">
+                <label for="date">تاريخ الحجز</label>
+                <input id="date" name="date" type="date" required>
+              </div>
+
+              <div class="field">
+                <label for="duration">مدة الحجز</label>
+                <select id="duration" name="duration" required>
+                  <option value="12">12 ساعة</option>
+                  <option value="24">24 ساعة</option>
+                </select>
+              </div>
+
+              <div class="field">
+                <label for="dayType">نوع اليوم</label>
+                <select id="dayType" name="dayType" required>
+                  <option value="weekday">وسط الأسبوع</option>
+                  <option value="weekend">نهاية الأسبوع</option>
+                  <option value="holiday">الأعياد</option>
+                </select>
+              </div>
+
+              <div class="field">
+                <label for="deposit">العربون</label>
+                <input id="deposit" name="deposit" type="number" min="0" placeholder="مثال: 300">
+              </div>
+
+              <div class="field full">
+                <label for="notes">ملاحظات إضافية</label>
+                <textarea id="notes" name="notes" placeholder="أي تفاصيل إضافية يكتبها العميل"></textarea>
+              </div>
+            </div>
+
+            <div class="addons-box">
+              <div class="addon-row">
+                <div>
+                  <strong style="display:block; margin-bottom:6px; color:#fff;">الإضافات</strong>
+                  <span class="muted">الملعب الصابوني متاح فقط بعد تأكيد الحجز من الإدارة.</span>
+                </div>
+                <strong style="color:var(--gold);">150 ريال</strong>
+              </div>
+            </div>
+
+            <div class="price-preview">
+              <div>
+                <div class="muted">السعر المتوقع للحجز</div>
+                <strong id="finalPrice">800 ريال</strong>
+              </div>
+              <div class="muted" id="remainingText">المتبقي بعد العربون يظهر هنا</div>
+            </div>
+
+            <div class="notice">عند الضغط على إرسال، يتم حفظ الحجز في قاعدة البيانات ثم فتح رسالة واتساب جاهزة للإرسال.</div>
+            <div class="success-message" id="successMessage">تم حفظ الطلب بنجاح، ويتم الآن تجهيز رسالة الواتساب.</div>
+
+            <div class="form-actions">
+              <button type="submit" class="btn btn-primary">إرسال طلب الحجز</button>
+              <button type="button" class="btn btn-secondary" id="copyReceiptBtn">نسخ نص وصل العربون</button>
+            </div>
+          </form>
+        </div>
+
+        <div class="contact-card" id="contact">
+          <h3>التواصل المباشر</h3>
+          <p class="form-hint">في حال وجود استفسار سريع، تواصل معنا مباشرة عبر الواتساب.</p>
+          <div class="contact-list">
+            <div class="contact-item"><strong>رقم الواتساب:</strong><br>0556662246</div>
+            <div class="contact-item"><strong>مواعيد الحجز:</strong><br>12 ساعة أو 24 ساعة حسب رغبة العميل.</div>
+            <div class="contact-item"><strong>ملاحظة:</strong><br>تأكيد الحجز النهائي يتم بعد مراجعة الطلب من الإدارة.</div>
+          </div>
+          <div style="margin-top:16px;">
+            <a class="btn btn-primary btn-full" target="_blank" href="https://wa.me/966556662246?text=%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%20%D8%B9%D9%84%D9%8A%D9%83%D9%85%D8%8C%20%D8%A3%D8%A8%D9%8A%20%D8%A7%D9%84%D8%A7%D8%B3%D8%AA%D9%81%D8%B3%D8%A7%D8%B1%20%D8%B9%D9%86%20%D8%A7%D9%84%D8%AD%D8%AC%D8%B2%20%D9%81%D9%8A%20%D9%85%D9%86%D8%AA%D8%AC%D8%B9%20%D9%88%D9%85%D8%AE%D9%8A%D9%85%20%D8%A7%D9%84%D8%B1%D9%85%D8%A7%D9%84">فتح الواتساب</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container foot">
+      <div>منتجع ومخيم الرمال</div>
+      <div>Developed by Aood99ad</div>
+    </div>
+  </footer>
+
+  <a class="float-whatsapp" target="_blank" href="https://wa.me/966556662246?text=%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%20%D8%B9%D9%84%D9%8A%D9%83%D9%85%D8%8C%20%D8%A3%D8%A8%D9%8A%20%D8%A3%D8%AD%D8%AC%D8%B2%20%D9%81%D9%8A%20%D9%85%D9%86%D8%AA%D8%AC%D8%B9%20%D9%88%D9%85%D8%AE%D9%8A%D9%85%20%D8%A7%D9%84%D8%B1%D9%85%D8%A7%D9%84" aria-label="واتساب">✆</a>
+
+  <script>
+    const prices = {
+      12: { weekday: 800, weekend: 950, holiday: 1200 },
+      24: { weekday: 1300, weekend: 1700, holiday: 2200 }
+    };
+
+    const duration = document.getElementById('duration');
+    const dayType = document.getElementById('dayType');
+    const deposit = document.getElementById('deposit');
+    const finalPrice = document.getElementById('finalPrice');
+    const remainingText = document.getElementById('remainingText');
+    const copyReceiptBtn = document.getElementById('copyReceiptBtn');
+
+    function getPrice() {
+      return prices[duration.value][dayType.value];
+    }
+
+    function updatePrice() {
+      const total = getPrice();
+      const depositValue = Number(deposit.value || 0);
+      const remaining = Math.max(total - depositValue, 0);
+      finalPrice.textContent = `${total} ريال`;
+      remainingText.textContent = depositValue > 0
+        ? `العربون: ${depositValue} ريال • المتبقي: ${remaining} ريال`
+        : 'أضف العربون وسيظهر المتبقي هنا';
+    }
+
+    function buildReceiptText() {
+      const name = document.getElementById('name').value || '---';
+      const phone = document.getElementById('phone').value || '---';
+      const date = document.getElementById('date').value || '---';
+      const durationText = duration.options[duration.selectedIndex].text;
+      const dayTypeText = dayType.options[dayType.selectedIndex].text;
+      const total = getPrice();
+      const depositValue = Number(deposit.value || 0);
+      const remaining = Math.max(total - depositValue, 0);
+
+      return `وصل عربون - منتجع ومخيم الرمال\n\nالاسم: ${name}\nرقم الجوال: ${phone}\nتاريخ الحجز: ${date}\nمدة الحجز: ${durationText}\nنوع اليوم: ${dayTypeText}\nإجمالي السعر: ${total} ريال\nالعربون: ${depositValue} ريال\nالمتبقي: ${remaining} ريال`;
+    }
+
+    duration.addEventListener('change', updatePrice);
+    dayType.addEventListener('change', updatePrice);
+    deposit.addEventListener('input', updatePrice);
+
+    copyReceiptBtn.addEventListener('click', async () => {
+      const text = buildReceiptText();
+      try {
+        await navigator.clipboard.writeText(text);
+        copyReceiptBtn.textContent = 'تم نسخ وصل العربون';
+        setTimeout(() => {
+          copyReceiptBtn.textContent = 'نسخ نص وصل العربون';
+        }, 1800);
+      } catch {
+        alert(text);
+      }
+    });
+
+    updatePrice();
+  </script>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getFirestore, addDoc, collection } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyBrsONe6O8Uqsczbuz3aBQyhfU2I9lfMAo",
+  authDomain: "alrimal2.firebaseapp.com",
+  projectId: "alrimal2",
+  storageBucket: "alrimal2.firebasestorage.app",
+  messagingSenderId: "886389694053",
+  appId: "1:886389694053:web:f03c204e9557d00778308c"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+const bookingForm = document.getElementById("bookingForm");
+
+bookingForm.addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  const name = document.getElementById("name").value.trim();
+  const phone = document.getElementById("phone").value.trim();
+  const date = document.getElementById("date").value;
+  const duration = document.getElementById("duration").options[document.getElementById("duration").selectedIndex].text;
+  const dayType = document.getElementById("dayType").options[document.getElementById("dayType").selectedIndex].text;
+  const deposit = Number(document.getElementById("deposit").value || 0);
+  const notes = document.getElementById("notes").value.trim();
+
+  const prices = {
+    "12 ساعة": { "وسط الأسبوع": 800, "نهاية الأسبوع": 950, "الأعياد": 1200 },
+    "24 ساعة": { "وسط الأسبوع": 1300, "نهاية الأسبوع": 1700, "الأعياد": 2200 }
+  };
+
+  const price = prices[duration][dayType];
+  const remaining = Math.max(price - deposit, 0);
+
+  const message = `السلام عليكم، عندي طلب حجز جديد في منتجع ومخيم الرمال.
+
+الاسم: ${name}
+رقم الجوال: ${phone}
+تاريخ الحجز: ${date}
+مدة الحجز: ${duration}
+نوع اليوم: ${dayType}
+إجمالي السعر: ${price} ريال
+العربون: ${deposit} ريال
+المتبقي: ${remaining} ريال
+ملاحظات: ${notes || "لا يوجد"}`;
+
+  try {
+    await addDoc(collection(db, "bookings"), {
+      name,
+      phone,
+      date,
+      duration,
+      dayType,
+      price,
+      deposit,
+      remaining,
+      notes,
+      status: "pending",
+      createdAt: new Date().toISOString()
+    });
+
+    alert("تم حفظ الحجز");
+  } catch (error) {
+    console.error("save error", error);
+    alert("صار خطأ في الحفظ");
+  }
+
+  window.open(`https://wa.me/966556662246?text=${encodeURIComponent(message)}`, "_blank");
+});
+</script>
+</body>
+</html>
