@@ -1036,27 +1036,24 @@ bookingForm.addEventListener("submit", async (e) => {
 ملاحظات: ${notes || "لا يوجد"}`;
 
   try {
-    await addDoc(collection(db, "bookings"), {
-      name,
-      phone,
-      date,
-      duration,
-      dayType,
-      price,
-      deposit,
-      remaining,
-      notes,
-      status: "pending",
-      createdAt: new Date().toISOString()
-    });
+  await addDoc(collection(db, "bookings"), {
+    name,
+    phone,
+    date,
+    duration,
+    dayType,
+    price,
+    deposit,
+    remaining,
+    notes,
+    status: "pending",
+    createdAt: new Date().toISOString()
+  });
+} catch (error) {
+  console.error("save error", error);
+}
 
-    alert("تم حفظ الحجز");
-  } catch (error) {
-    console.error("save error", error);
-    alert("صار خطأ في الحفظ");
-  }
-
-  window.open(`https://wa.me/966556662246?text=${encodeURIComponent(message)}`, "_blank");
+window.location.href = `https://wa.me/966556662246?text=${encodeURIComponent(message)}`;
 });
 </script>
 </body>
