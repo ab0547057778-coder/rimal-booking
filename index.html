@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>منتجع ومخيم رمال</title>
+  <title>منتجع رمال</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
@@ -38,6 +38,7 @@
         linear-gradient(180deg, #080808 0%, #0d0d0d 100%);
       color: var(--text);
     }
+
     a { color: inherit; text-decoration: none; }
     img { max-width: 100%; display: block; }
 
@@ -116,7 +117,6 @@
 
     .card,
     .hero-card,
-    .panel,
     .service-card,
     .price-card,
     .day-card,
@@ -432,9 +432,7 @@
       font-weight: 900;
     }
 
-    .day-card {
-      text-align: center;
-    }
+    .day-card { text-align: center; }
 
     .day-card strong {
       display: block;
@@ -634,6 +632,110 @@
       border: 1px solid rgba(255,255,255,.14);
     }
 
+    .chat-toggle {
+      position: fixed;
+      bottom: 94px;
+      left: 18px;
+      width: 62px;
+      height: 62px;
+      border-radius: 50%;
+      border: none;
+      background: linear-gradient(135deg, var(--red), var(--red-2));
+      color: white;
+      font-size: 28px;
+      cursor: pointer;
+      box-shadow: 0 16px 30px rgba(179, 0, 24, 0.30);
+      z-index: 1001;
+    }
+
+    .chat-widget {
+      position: fixed;
+      bottom: 166px;
+      left: 18px;
+      width: 360px;
+      max-width: calc(100% - 30px);
+      background: rgba(255,255,255,0.97);
+      border-radius: 24px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.16);
+      overflow: hidden;
+      display: none;
+      z-index: 1000;
+      border: 1px solid rgba(220,220,220,0.95);
+    }
+
+    .chat-header {
+      background: linear-gradient(135deg, #111, #b30018);
+      color: white;
+      padding: 16px;
+      font-weight: bold;
+      font-size: 16px;
+    }
+
+    .chat-sub {
+      font-size: 12px;
+      opacity: 0.9;
+      margin-top: 4px;
+      font-weight: normal;
+    }
+
+    .chat-box {
+      height: 320px;
+      overflow-y: auto;
+      padding: 14px;
+      background: #f8f8f8;
+    }
+
+    .msg {
+      max-width: 85%;
+      padding: 10px 14px;
+      border-radius: 16px;
+      margin-bottom: 10px;
+      font-size: 14px;
+      line-height: 1.8;
+      white-space: pre-wrap;
+    }
+
+    .bot {
+      background: #f1f1f1;
+      color: #111;
+      margin-left: auto;
+    }
+
+    .user {
+      background: #ffe3e8;
+      color: #111;
+      margin-right: auto;
+    }
+
+    .chat-input {
+      display: flex;
+      gap: 8px;
+      padding: 12px;
+      border-top: 1px solid #ebebeb;
+      background: white;
+    }
+
+    .chat-input input {
+      flex: 1;
+      border: 1px solid #ddd;
+      border-radius: 12px;
+      padding: 12px;
+      outline: none;
+      font-size: 14px;
+      color: #111;
+      background: #fff;
+    }
+
+    .chat-input button {
+      border: none;
+      border-radius: 12px;
+      padding: 12px 16px;
+      background: #b30018;
+      color: white;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
     @media (max-width: 1080px) {
       .hero-grid,
       .booking-wrap {
@@ -657,12 +759,17 @@
       .form-grid,
       .availability-grid,
       .policy-grid,
-      .gallery-side {
-        grid-template-columns: 1fr;
-      }
+      .gallery-side { grid-template-columns: 1fr; }
       .section-head { align-items: start; }
       .price-preview, .addon-row { flex-direction: column; align-items: start; }
       .foot { flex-direction: column; }
+      .chat-widget {
+        left: 10px;
+        bottom: 160px;
+        width: calc(100% - 20px);
+      }
+      .float-whatsapp { left: 10px; bottom: 12px; }
+      .chat-toggle { left: 10px; bottom: 88px; }
     }
   </style>
 </head>
@@ -671,7 +778,7 @@
     <div class="container nav">
       <a href="#top" class="brand">
         <div class="brand-badge">ر</div>
-        <div>منتجع ومخيم رمال</div>
+        <div>منتجع رمال</div>
       </a>
       <div class="menu">
         <a href="#services">الخدمات</a>
@@ -688,20 +795,20 @@
       <div class="container hero-grid">
         <div class="hero-card">
           <div class="eyebrow">خصوصية • راحة • حجز سريع</div>
-          <h1>منتجع ومخيم رمال<br></h1>
+          <h1>منتجع رمال<br>تجربة راقية وحجز واضح</h1>
           <p>
-            منتجع ومخيم الرمال يوفّر أجواء راقية وجلسات مميزة للعائلة والأصدقاء، مع أسعار واضحة،
-            خدمات متكاملة، ومواعيد تظهر مباشرة حسب حالة الحجز.
+            منتجع رمال يوفّر أجواء جميلة للعائلة والأصدقاء مع أسعار واضحة، خدمات متكاملة،
+            وتجربة حجز سهلة وسريعة مع تواصل مباشر عبر الواتساب.
           </p>
           <div class="hero-actions">
             <a class="btn btn-primary" href="#booking">ابدأ الحجز الآن</a>
-            <a class="btn btn-secondary" target="_blank" href="https://wa.me/966556662246?text=%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%20%D8%B9%D9%84%D9%8A%D9%83%D9%85%D8%8C%20%D8%A3%D8%A8%D9%8A%20%D8%A7%D9%84%D8%A7%D8%B3%D8%AA%D9%81%D8%B3%D8%A7%D8%B1%20%D8%B9%D9%86%20%D8%A7%D9%84%D8%AD%D8%AC%D8%B2%20%D9%81%D9%8A%20%D9%85%D9%86%D8%AA%D8%AC%D8%B9%20%D9%88%D9%85%D8%AE%D9%8A%D9%85%20%D8%A7%D9%84%D8%B1%D9%85%D8%A7%D9%84">تواصل واتساب</a>
+            <a class="btn btn-secondary" target="_blank" href="https://wa.me/966556662246?text=%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%20%D8%B9%D9%84%D9%8A%D9%83%D9%85%D8%8C%20%D8%A3%D8%A8%D9%8A%20%D8%A7%D9%84%D8%A7%D8%B3%D8%AA%D9%81%D8%B3%D8%A7%D8%B1%20%D8%B9%D9%86%20%D8%A7%D9%84%D8%AD%D8%AC%D8%B2%20%D9%81%D9%8A%20%D9%85%D9%86%D8%AA%D8%AC%D8%B9%20%D8%B1%D9%85%D8%A7%D9%84">تواصل واتساب</a>
           </div>
           <div class="hero-badges">
-            
+            <div class="badge">واجهة فخمة</div>
             <div class="badge">أسعار واضحة</div>
-            <div class="badge">تأكيد سريع</div>
             <div class="badge">حجز مباشر</div>
+            <div class="badge">تأكيد سريع</div>
           </div>
         </div>
 
@@ -712,7 +819,7 @@
                 <div class="gallery-item"><img src="images/hero.jpg" alt="صورة رئيسية"></div>
               </div>
               <div class="gallery-side">
-                <div class="gallery-item"><img src="images/chair.jpg" alt="صورة كرسي معلق"></div>
+                <div class="gallery-item"><img src="images/chair.jpg" alt="صورة جلسة"></div>
                 <div class="gallery-item"><img src="images/night.jpg" alt="صورة ليلية"></div>
                 <div class="gallery-item"><img src="images/majlis1.jpg" alt="صورة مجلس"></div>
                 <div class="gallery-item"><img src="images/hero (2).jpg" alt="صورة إضافية"></div>
@@ -720,7 +827,7 @@
             </div>
           </div>
 
-          <div class="panel quick-info">
+          <div class="card quick-info">
             <div class="item">
               <span>رقم الواتساب</span>
               <strong>0556662246</strong>
@@ -751,14 +858,14 @@
           </div>
         </div>
         <div class="services-grid">
-          <div class="service-card"><h3>مجلس رجال</h3><p>جلسة مرتبة ومريحة تناسب الاستقبال والضيافة.</p></div>
-          <div class="service-card"><h3>مجلس حريم</h3><p>خصوصية عالية ومساحة مناسبة للعائلة والجلسات الهادئة.</p></div>
-          <div class="service-card"><h3>مطبخ</h3><p>مطبخ مجهز يساعدكم على التحضير بسهولة أثناء فترة الحجز.</p></div>
-          <div class="service-card"><h3>ملعب</h3><p>مساحة مناسبة للعب والأنشطة والحركة داخل المنتجع.</p></div>
-          <div class="service-card"><h3>مسبح</h3><p>أجواء منعشة وتجربة ممتعة تناسب الاسترخاء والراحة.</p></div>
-          <div class="service-card"><h3>ألعاب مائية</h3><p>إضافة ممتعة تعطي جوًا ترفيهيًا مميزًا داخل الحجز.</p></div>
-          <div class="service-card"><h3>ألعاب أطفال</h3><p>خيارات مناسبة للصغار لزيادة المتعة وراحة العائلة.</p></div>
-          <div class="service-card"><h3>ملعب صابوني</h3><p>إضافة خاصة بقيمة 150 ريال، وتتوفر فقط بعد وجود حجز مؤكد.</p></div>
+          <div class="service-card"><div class="service-icon">رج</div><h3>مجلس رجال</h3><p>جلسة مرتبة ومريحة تناسب الاستقبال والضيافة.</p></div>
+          <div class="service-card"><div class="service-icon">حر</div><h3>مجلس حريم</h3><p>خصوصية عالية ومساحة مناسبة للعائلة والجلسات الهادئة.</p></div>
+          <div class="service-card"><div class="service-icon">مط</div><h3>مطبخ</h3><p>مطبخ مجهز يساعدكم على التحضير بسهولة أثناء فترة الحجز.</p></div>
+          <div class="service-card"><div class="service-icon">مل</div><h3>ملعب</h3><p>مساحة مناسبة للعب والأنشطة والحركة داخل المنتجع.</p></div>
+          <div class="service-card"><div class="service-icon">مس</div><h3>مسبح</h3><p>أجواء منعشة وتجربة ممتعة تناسب الاسترخاء والراحة.</p></div>
+          <div class="service-card"><div class="service-icon">ما</div><h3>ألعاب مائية</h3><p>إضافة ممتعة تعطي جوًا ترفيهيًا مميزًا داخل الحجز.</p></div>
+          <div class="service-card"><div class="service-icon">طف</div><h3>ألعاب أطفال</h3><p>خيارات مناسبة للصغار لزيادة المتعة وراحة العائلة.</p></div>
+          <div class="service-card"><div class="service-icon">صب</div><h3>ملعب صابوني</h3><p>إضافة خاصة بقيمة 150 ريال، وتتوفر فقط بعد وجود حجز مؤكد.</p></div>
         </div>
       </div>
     </section>
@@ -803,8 +910,8 @@
           </div>
         </div>
         <div class="policy-grid">
-          <div class="policy-card"><h3>تأكيد الحجز</h3><p>يتم رفع الطلب أولًا ثم مراجعة الحجز من الإدارة وتأكيده حسب توفر التاريخ.</p></div>
-          <div class="policy-card"><h3>العربون</h3><p>يمكن كتابة العربون داخل النموذج، وسيظهر المتبقي بشكل تلقائي قبل الإرسال.</p></div>
+          <div class="policy-card"><h3>تأكيد الحجز</h3><p>لا يتم تأكيد الحجز إلا بعد دفع العربون ومراجعة الطلب من الإدارة.</p></div>
+          <div class="policy-card"><h3>العربون</h3><p>يظهر المبلغ المتبقي تلقائيًا داخل النموذج قبل إرسال طلب الحجز.</p></div>
           <div class="policy-card"><h3>الإضافات</h3><p>الملعب الصابوني خدمة إضافية بقيمة 150 ريال، ولا يتم تفعيله إلا بعد تأكيد الحجز.</p></div>
         </div>
       </div>
@@ -826,7 +933,7 @@
       <div class="container booking-wrap">
         <div class="form-card">
           <h3>طلب حجز جديد</h3>
-          <p class="form-hint">أدخل البيانات بدقة، ثم سيتم حفظ الطلب وتجهيز رسالة واتساب مباشرة.</p>
+          <p class="form-hint">أدخل البيانات بدقة، وسيتم حفظ الطلب ثم فتح الواتساب مباشرة.</p>
 
           <form id="bookingForm">
             <div class="form-grid">
@@ -891,8 +998,8 @@
               <div class="muted" id="remainingText">المتبقي بعد العربون يظهر هنا</div>
             </div>
 
-            <div class="notice">عند الضغط على إرسال، يتم حفظ الحجز في قاعدة البيانات ثم فتح رسالة واتساب جاهزة للإرسال.</div>
-            <div class="success-message" id="successMessage">تم حفظ الطلب بنجاح، ويتم الآن تجهيز رسالة الواتساب.</div>
+            <div class="notice">عند الضغط على إرسال، يتم حفظ الحجز في النظام ثم تحويلك للواتساب مباشرة.</div>
+            <div class="success-message" id="successMessage">تم حفظ الطلب بنجاح، ويتم الآن تحويلك للواتساب.</div>
 
             <div class="form-actions">
               <button type="submit" class="btn btn-primary">إرسال طلب الحجز</button>
@@ -910,7 +1017,7 @@
             <div class="contact-item"><strong>ملاحظة:</strong><br>تأكيد الحجز النهائي يتم بعد مراجعة الطلب من الإدارة.</div>
           </div>
           <div style="margin-top:16px;">
-            <a class="btn btn-primary btn-full" target="_blank" href="https://wa.me/966556662246?text=%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%20%D8%B9%D9%84%D9%8A%D9%83%D9%85%D8%8C%20%D8%A3%D8%A8%D9%8A%20%D8%A7%D9%84%D8%A7%D8%B3%D8%AA%D9%81%D8%B3%D8%A7%D8%B1%20%D8%B9%D9%86%20%D8%A7%D9%84%D8%AD%D8%AC%D8%B2%20%D9%81%D9%8A%20%D9%85%D9%86%D8%AA%D8%AC%D8%B9%20%D9%88%D9%85%D8%AE%D9%8A%D9%85%20%D8%A7%D9%84%D8%B1%D9%85%D8%A7%D9%84">فتح الواتساب</a>
+            <a class="btn btn-primary btn-full" target="_blank" href="https://wa.me/966556662246?text=%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%20%D8%B9%D9%84%D9%8A%D9%83%D9%85%D8%8C%20%D8%A3%D8%A8%D9%8A%20%D8%A7%D9%84%D8%A7%D8%B3%D8%AA%D9%81%D8%B3%D8%A7%D8%B1%20%D8%B9%D9%86%20%D8%A7%D9%84%D8%AD%D8%AC%D8%B2%20%D9%81%D9%8A%20%D9%85%D9%86%D8%AA%D8%AC%D8%B9%20%D8%B1%D9%85%D8%A7%D9%84">فتح الواتساب</a>
           </div>
         </div>
       </div>
@@ -919,12 +1026,30 @@
 
   <footer class="footer">
     <div class="container foot">
-      <div>منتجع ومخيم الرمال</div>
-      <div>Developed by Aood99ad</div>
+      <div>منتجع رمال</div>
+      <div>جاهز للحجز والتواصل المباشر</div>
     </div>
   </footer>
 
-  <a class="float-whatsapp" target="_blank" href="https://wa.me/966556662246?text=%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%20%D8%B9%D9%84%D9%8A%D9%83%D9%85%D8%8C%20%D8%A3%D8%A8%D9%8A%20%D8%A3%D8%AD%D8%AC%D8%B2%20%D9%81%D9%8A%20%D9%85%D9%86%D8%AA%D8%AC%D8%B9%20%D9%88%D9%85%D8%AE%D9%8A%D9%85%20%D8%A7%D9%84%D8%B1%D9%85%D8%A7%D9%84" aria-label="واتساب">✆</a>
+  <button class="chat-toggle" onclick="toggleChat()">💬</button>
+
+  <div class="chat-widget" id="chatWidget">
+    <div class="chat-header">
+      مساعد منتجع رمال
+      <div class="chat-sub">اسأل عن الأسعار أو الخدمات أو الحجز</div>
+    </div>
+
+    <div class="chat-box" id="chatBox">
+      <div class="msg bot">ياهلا وسهلا، أنا مساعد منتجع رمال. كيف أقدر أخدمك؟</div>
+    </div>
+
+    <div class="chat-input">
+      <input type="text" id="chatInput" placeholder="اكتب سؤالك هنا...">
+      <button onclick="sendMessage()">إرسال</button>
+    </div>
+  </div>
+
+  <a class="float-whatsapp" target="_blank" href="https://wa.me/966556662246?text=%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%20%D8%B9%D9%84%D9%8A%D9%83%D9%85%D8%8C%20%D8%A3%D8%A8%D9%8A%20%D8%A3%D8%AD%D8%AC%D8%B2%20%D9%81%D9%8A%20%D9%85%D9%86%D8%AA%D8%AC%D8%B9%20%D8%B1%D9%85%D8%A7%D9%84" aria-label="واتساب">✆</a>
 
   <script>
     const prices = {
@@ -963,7 +1088,7 @@
       const depositValue = Number(deposit.value || 0);
       const remaining = Math.max(total - depositValue, 0);
 
-      return `وصل عربون - منتجع ومخيم الرمال\n\nالاسم: ${name}\nرقم الجوال: ${phone}\nتاريخ الحجز: ${date}\nمدة الحجز: ${durationText}\nنوع اليوم: ${dayTypeText}\nإجمالي السعر: ${total} ريال\nالعربون: ${depositValue} ريال\nالمتبقي: ${remaining} ريال`;
+      return `وصل عربون - منتجع رمال\n\nالاسم: ${name}\nرقم الجوال: ${phone}\nتاريخ الحجز: ${date}\nمدة الحجز: ${durationText}\nنوع اليوم: ${dayTypeText}\nإجمالي السعر: ${total} ريال\nالعربون: ${depositValue} ريال\nالمتبقي: ${remaining} ريال`;
     }
 
     duration.addEventListener('change', updatePrice);
@@ -984,80 +1109,191 @@
     });
 
     updatePrice();
+
+    function addMessage(text, sender) {
+      const chatBox = document.getElementById('chatBox');
+      const message = document.createElement('div');
+      message.className = `msg ${sender}`;
+      message.textContent = text;
+      chatBox.appendChild(message);
+      chatBox.scrollTop = chatBox.scrollHeight;
+    }
+
+    async function getBotReply(message) {
+      try {
+        const res = await fetch('/api/chat', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ message })
+        });
+
+        const data = await res.json();
+
+        if (!res.ok) {
+          return data?.error || 'تعذر الرد الآن، حاول مرة ثانية.';
+        }
+
+        return data?.reply || 'تعذر الرد الآن، حاول مرة ثانية.';
+      } catch (err) {
+        return 'صار خطأ مؤقت في المساعد، حاول مرة ثانية.';
+      }
+    }
+
+    window.toggleChat = function () {
+      const chat = document.getElementById('chatWidget');
+      chat.style.display = chat.style.display === 'block' ? 'none' : 'block';
+    };
+
+    window.sendMessage = async function () {
+      const input = document.getElementById('chatInput');
+      const text = input.value.trim();
+
+      if (!text) return;
+
+      addMessage(text, 'user');
+      input.value = '';
+
+      addMessage('...جاري الرد', 'bot');
+
+      const chatBox = document.getElementById('chatBox');
+      const loadingMsg = chatBox.lastElementChild;
+
+      const reply = await getBotReply(text);
+
+      if (loadingMsg) {
+        loadingMsg.remove();
+      }
+
+      addMessage(reply, 'bot');
+    };
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const input = document.getElementById('chatInput');
+      if (input) {
+        input.addEventListener('keypress', function (e) {
+          if (e.key === 'Enter') {
+            e.preventDefault();
+            window.sendMessage();
+          }
+        });
+      }
+    });
   </script>
 
-<script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import { getFirestore, addDoc, collection } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import { getFirestore, addDoc, collection, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-const firebaseConfig = {
-  apiKey: "AIzaSyBrsONe6O8Uqsczbuz3aBQyhfU2I9lfMAo",
-  authDomain: "alrimal2.firebaseapp.com",
-  projectId: "alrimal2",
-  storageBucket: "alrimal2.firebasestorage.app",
-  messagingSenderId: "886389694053",
-  appId: "1:886389694053:web:f03c204e9557d00778308c"
-};
+    const firebaseConfig = {
+      apiKey: "AIzaSyBrsONe6O8Uqsczbuz3aBQyhfU2I9lfMAo",
+      authDomain: "alrimal2.firebaseapp.com",
+      projectId: "alrimal2",
+      storageBucket: "alrimal2.firebasestorage.app",
+      messagingSenderId: "886389694053",
+      appId: "1:886389694053:web:f03c204e9557d00778308c"
+    };
 
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
 
-const bookingForm = document.getElementById("bookingForm");
+    const bookingForm = document.getElementById('bookingForm');
+    const availabilityGrid = document.getElementById('availabilityGrid');
+    const successMessage = document.getElementById('successMessage');
 
-bookingForm.addEventListener("submit", async (e) => {
-  e.preventDefault();
+    async function loadAvailability() {
+      try {
+        const q = query(collection(db, 'bookings'), orderBy('date', 'asc'));
+        const snapshot = await getDocs(q);
 
-  const name = document.getElementById("name").value.trim();
-  const phone = document.getElementById("phone").value.trim();
-  const date = document.getElementById("date").value;
-  const duration = document.getElementById("duration").options[document.getElementById("duration").selectedIndex].text;
-  const dayType = document.getElementById("dayType").options[document.getElementById("dayType").selectedIndex].text;
-  const deposit = Number(document.getElementById("deposit").value || 0);
-  const notes = document.getElementById("notes").value.trim();
+        const bookings = snapshot.docs
+          .map(doc => ({ id: doc.id, ...doc.data() }))
+          .filter(item => item.status !== 'cancelled');
 
-  const prices = {
-    "12 ساعة": { "وسط الأسبوع": 800, "نهاية الأسبوع": 950, "الأعياد": 1200 },
-    "24 ساعة": { "وسط الأسبوع": 1300, "نهاية الأسبوع": 1700, "الأعياد": 2200 }
-  };
+        if (!bookings.length) {
+          availabilityGrid.innerHTML = `
+            <div class="day-card">
+              <strong>لا توجد حجوزات حالياً</strong>
+              <p>كل الأيام متاحة</p>
+              <div class="status available">متاح</div>
+            </div>
+          `;
+          return;
+        }
 
-  const price = prices[duration][dayType];
-  const remaining = Math.max(price - deposit, 0);
+        availabilityGrid.innerHTML = bookings.map(item => `
+          <div class="day-card">
+            <strong>${item.date}</strong>
+            <p>${item.name}</p>
+            <div class="status ${item.status === 'confirmed' ? 'booked' : 'pending'}">
+              ${item.status === 'confirmed' ? 'محجوز' : 'بانتظار'}
+            </div>
+          </div>
+        `).join('');
+      } catch (error) {
+        availabilityGrid.innerHTML = `
+          <div class="day-card">
+            <strong>تعذر تحميل المواعيد</strong>
+            <p>تأكد من إعدادات قاعدة البيانات</p>
+            <div class="status pending">مراجعة مطلوبة</div>
+          </div>
+        `;
+        console.error(error);
+      }
+    }
 
-  const message = `السلام عليكم، عندي طلب حجز جديد في منتجع ومخيم الرمال.
+    bookingForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
 
-الاسم: ${name}
-رقم الجوال: ${phone}
-تاريخ الحجز: ${date}
-مدة الحجز: ${duration}
-نوع اليوم: ${dayType}
-إجمالي السعر: ${price} ريال
-العربون: ${deposit} ريال
-المتبقي: ${remaining} ريال
-ملاحظات: ${notes || "لا يوجد"}`;
+      const name = document.getElementById('name').value.trim();
+      const phone = document.getElementById('phone').value.trim();
+      const date = document.getElementById('date').value;
+      const notes = document.getElementById('notes').value.trim();
+      const durationEl = document.getElementById('duration');
+      const dayTypeEl = document.getElementById('dayType');
+      const depositEl = document.getElementById('deposit');
 
-  try {
-    await addDoc(collection(db, "bookings"), {
-      name,
-      phone,
-      date,
-      duration,
-      dayType,
-      price,
-      deposit,
-      remaining,
-      notes,
-      status: "pending",
-      createdAt: new Date().toISOString()
+      const durationValue = Number(durationEl.value);
+      const durationText = durationEl.options[durationEl.selectedIndex].text;
+      const dayTypeValue = dayTypeEl.value;
+      const dayTypeText = dayTypeEl.options[dayTypeEl.selectedIndex].text;
+      const depositValue = Number(depositEl.value || 0);
+      const total = prices[durationValue][dayTypeValue];
+      const remaining = Math.max(total - depositValue, 0);
+
+      const message = `السلام عليكم، عندي طلب حجز جديد في منتجع رمال.\n\nالاسم: ${name}\nرقم الجوال: ${phone}\nتاريخ الحجز: ${date}\nمدة الحجز: ${durationText}\nنوع اليوم: ${dayTypeText}\nإجمالي السعر: ${total} ريال\nالعربون: ${depositValue} ريال\nالمتبقي: ${remaining} ريال\nملاحظات: ${notes || 'لا يوجد'}`;
+
+      try {
+        await addDoc(collection(db, 'bookings'), {
+          name,
+          phone,
+          date,
+          duration: durationText,
+          durationValue,
+          dayType: dayTypeText,
+          dayTypeValue,
+          price: total,
+          deposit: depositValue,
+          remaining,
+          notes,
+          status: 'pending',
+          soapField: false,
+          createdAt: new Date().toISOString()
+        });
+
+        successMessage.style.display = 'block';
+        await loadAvailability();
+      } catch (error) {
+        console.error(error);
+      }
+
+      bookingForm.reset();
+      updatePrice();
+      window.location.href = `https://wa.me/966556662246?text=${encodeURIComponent(message)}`;
     });
 
-    alert("تم حفظ الحجز");
-  } catch (error) {
-    console.error("save error", error);
-    alert("صار خطأ في الحفظ");
-  }
-
-  window.open(`https://wa.me/966556662246?text=${encodeURIComponent(message)}`, "_blank");
-});
-</script>
+    loadAvailability();
+  </script>
 </body>
 </html>
