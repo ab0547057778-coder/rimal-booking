@@ -3,1416 +3,1296 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ORIAN RESORT</title>
+  <title>منتجع رمال</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
   <style>
-    :root{
-      --bg:#050505;
-      --bg-soft:#0b0b0b;
-      --card:#101010;
-      --card-2:#141414;
-      --line:rgba(255,215,120,.14);
-      --gold:#d4af37;
-      --gold-2:#f5df8b;
-      --gold-3:#8e6b16;
-      --text:#f5f1e6;
-      --muted:#b9ae90;
-      --shadow:0 20px 60px rgba(0,0,0,.45);
-      --radius:24px;
-      --whatsapp:#25D366;
+    :root {
+      --bg: #070707;
+      --bg-soft: #101010;
+      --panel: rgba(255,255,255,0.06);
+      --panel-strong: rgba(255,255,255,0.10);
+      --line: rgba(255,255,255,0.10);
+      --text: #ffffff;
+      --muted: #cfcfcf;
+      --red: #b30018;
+      --red-2: #e21a32;
+      --gold: #f2d18b;
+      --green: #38c172;
+      --orange: #ffb347;
+      --shadow: 0 18px 50px rgba(0,0,0,0.45);
+      --radius: 26px;
+      --radius-sm: 18px;
+      --container: 1200px;
     }
 
-    *{
-      box-sizing:border-box;
-      -webkit-tap-highlight-color:transparent;
-    }
-
-    html{
-      scroll-behavior:smooth;
-    }
-
-    body{
-      margin:0;
-      font-family:"Tajawal",sans-serif;
-      color:var(--text);
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: 'Tajawal', sans-serif;
       background:
-        radial-gradient(circle at top right, rgba(212,175,55,.12), transparent 22%),
-        radial-gradient(circle at 20% 10%, rgba(245,223,139,.06), transparent 18%),
-        linear-gradient(180deg, #050505 0%, #090909 42%, #040404 100%);
-      min-height:100vh;
-      overflow-x:hidden;
+        radial-gradient(circle at top right, rgba(226,26,50,0.16), transparent 25%),
+        radial-gradient(circle at bottom left, rgba(179,0,24,0.18), transparent 30%),
+        linear-gradient(180deg, #080808 0%, #0d0d0d 100%);
+      color: var(--text);
     }
 
-    body::before{
-      content:"";
-      position:fixed;
-      inset:0;
-      pointer-events:none;
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    .container {
+      width: min(100% - 32px, var(--container));
+      margin-inline: auto;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(14px);
+      background: rgba(8,8,8,0.84);
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 14px 0;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 900;
+      font-size: 1.08rem;
+    }
+
+    .brand-badge {
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, var(--red), var(--red-2));
+      box-shadow: var(--shadow);
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+
+    .menu {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .menu a {
+      padding: 10px 14px;
+      border-radius: 999px;
+      color: var(--muted);
+      transition: .25s ease;
+      font-weight: 700;
+    }
+
+    .menu a:hover {
+      background: rgba(255,255,255,0.06);
+      color: var(--text);
+    }
+
+    .hero {
+      padding: 74px 0 32px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.08fr .92fr;
+      gap: 24px;
+      align-items: stretch;
+    }
+
+    .card,
+    .hero-card,
+    .service-card,
+    .price-card,
+    .day-card,
+    .form-card,
+    .contact-card,
+    .gallery-card,
+    .policy-card {
+      background: linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.04));
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-card {
+      padding: 36px;
+      position: relative;
+      overflow: hidden;
+      min-height: 520px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .hero-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
       background:
-        linear-gradient(rgba(255,255,255,.02) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,.02) 1px, transparent 1px);
-      background-size:32px 32px;
-      mask-image:linear-gradient(to bottom, rgba(0,0,0,.5), transparent 85%);
-      opacity:.25;
-    }
-
-    .container{
-      width:min(1180px, calc(100% - 32px));
-      margin:auto;
+        linear-gradient(135deg, rgba(226,26,50,.18), transparent 42%),
+        radial-gradient(circle at 85% 20%, rgba(255,255,255,.08), transparent 18%);
+      pointer-events: none;
     }
 
-    .topbar{
-      position:sticky;
-      top:0;
-      z-index:50;
-      backdrop-filter:blur(18px);
-      background:rgba(5,5,5,.62);
-      border-bottom:1px solid rgba(255,215,120,.08);
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      width: fit-content;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.08);
+      color: var(--gold);
+      font-weight: 800;
+      margin-bottom: 16px;
     }
 
-    .topbar-inner{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:20px;
-      min-height:82px;
-    }
-
-    .brand{
-      display:flex;
-      align-items:center;
-      gap:14px;
-    }
-
-    .brand-mark{
-      width:48px;
-      height:48px;
-      border-radius:16px;
-      display:grid;
-      place-items:center;
-      color:#000;
-      font-weight:900;
-      font-size:18px;
-      background:linear-gradient(135deg,var(--gold-2),var(--gold),var(--gold-3));
-      box-shadow:0 10px 25px rgba(212,175,55,.18);
-    }
-
-    .brand-text h1{
-      margin:0;
-      font-size:22px;
-      font-weight:900;
-      letter-spacing:1.5px;
-      color:var(--gold-2);
-    }
-
-    .brand-text p{
-      margin:3px 0 0;
-      font-size:12px;
-      color:var(--muted);
-      letter-spacing:2px;
-    }
-
-    .nav{
-      display:flex;
-      align-items:center;
-      gap:10px;
-      flex-wrap:wrap;
-    }
-
-    .nav a{
-      text-decoration:none;
-      color:var(--text);
-      font-size:14px;
-      padding:11px 16px;
-      border-radius:999px;
-      border:1px solid transparent;
-      transition:.25s;
-    }
-
-    .nav a:hover{
-      color:var(--gold-2);
-      border-color:rgba(255,215,120,.12);
-      background:rgba(255,255,255,.02);
-    }
-
-    .hero{
-      padding:34px 0 22px;
-    }
-
-    .hero-grid{
-      display:grid;
-      grid-template-columns:1.18fr .82fr;
-      gap:22px;
-      align-items:stretch;
-    }
-
-    .hero-main{
-      position:relative;
-      min-height:600px;
-      border-radius:34px;
-      overflow:hidden;
-      border:1px solid rgba(255,215,120,.1);
-      background:
-        linear-gradient(180deg, rgba(0,0,0,.15), rgba(0,0,0,.7)),
-        url('https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
-      box-shadow:var(--shadow);
-    }
-
-    .hero-main::after{
-      content:"";
-      position:absolute;
-      inset:0;
-      background:
-        radial-gradient(circle at 80% 18%, rgba(255,215,120,.18), transparent 18%),
-        linear-gradient(180deg, rgba(0,0,0,.06) 0%, rgba(0,0,0,.52) 58%, rgba(0,0,0,.86) 100%);
-    }
-
-    .hero-content{
-      position:relative;
-      z-index:1;
-      display:flex;
-      flex-direction:column;
-      justify-content:flex-end;
-      height:100%;
-      padding:42px;
-    }
-
-    .eyebrow{
-      display:inline-flex;
-      align-items:center;
-      gap:10px;
-      width:max-content;
-      margin-bottom:18px;
-      padding:10px 14px;
-      border-radius:999px;
-      background:rgba(8,8,8,.42);
-      border:1px solid rgba(255,215,120,.15);
-      color:var(--gold-2);
-      font-size:13px;
-      font-weight:700;
-      backdrop-filter:blur(10px);
-    }
-
-    .hero-content h2{
-      margin:0 0 14px;
-      font-size:64px;
-      line-height:1.02;
-      font-weight:900;
-      max-width:700px;
-      text-shadow:0 10px 40px rgba(0,0,0,.45);
-    }
-
-    .hero-content p{
-      margin:0;
-      max-width:620px;
-      color:#e7dcc0;
-      font-size:18px;
-      line-height:1.9;
-    }
-
-    .hero-actions{
-      margin-top:28px;
-      display:flex;
-      gap:14px;
-      flex-wrap:wrap;
-    }
-
-    .btn{
-      border:none;
-      cursor:pointer;
-      border-radius:16px;
-      padding:16px 22px;
-      font-family:inherit;
-      font-size:15px;
-      font-weight:800;
-      transition:.25s;
-      text-decoration:none;
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      gap:10px;
+    h1 {
+      margin: 0;
+      font-size: clamp(2.1rem, 4vw, 4.2rem);
+      line-height: 1.08;
+      font-weight: 900;
+      max-width: 680px;
     }
 
-    .btn-gold{
-      background:linear-gradient(135deg,var(--gold-2),var(--gold),#9b7418);
-      color:#060606;
-      box-shadow:0 16px 34px rgba(212,175,55,.24);
+    .hero p {
+      color: #dfdfdf;
+      font-size: 1.08rem;
+      line-height: 1.95;
+      margin: 18px 0 0;
+      max-width: 670px;
     }
-
-    .btn-gold:hover{
-      transform:translateY(-2px);
-      box-shadow:0 20px 38px rgba(212,175,55,.3);
-    }
-
-    .btn-whatsapp{
-      background:linear-gradient(135deg,#35d56d,var(--whatsapp));
-      color:#041109;
-      box-shadow:0 16px 34px rgba(37,211,102,.18);
-    }
-
-    .hero-side{
-      display:grid;
-      gap:22px;
-    }
-
-    .info-card, .booking-card, .section-card, .gallery-card, .testimonial-card{
-      background:linear-gradient(180deg, rgba(18,18,18,.95), rgba(10,10,10,.97));
-      border:1px solid rgba(255,215,120,.08);
-      border-radius:28px;
-      box-shadow:var(--shadow);
-    }
-
-    .info-card{
-      padding:24px;
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:14px;
-      min-height:180px;
-    }
-
-    .mini-stat{
-      padding:16px;
-      border-radius:20px;
-      background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.01));
-      border:1px solid rgba(255,215,120,.08);
-    }
-
-    .mini-stat span{
-      display:block;
-      color:var(--muted);
-      font-size:13px;
-      margin-bottom:10px;
-    }
 
-    .mini-stat strong{
-      font-size:24px;
-      color:var(--gold-2);
-      font-weight:900;
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 24px;
     }
 
-    .booking-card{
-      padding:24px;
+    .btn {
+      border: none;
+      cursor: pointer;
+      padding: 14px 20px;
+      border-radius: 16px;
+      font-family: inherit;
+      font-size: 1rem;
+      font-weight: 800;
+      transition: .25s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
     }
 
-    .card-title{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:12px;
-      margin-bottom:18px;
-      flex-wrap:wrap;
+    .btn-primary {
+      background: linear-gradient(135deg, var(--red), var(--red-2));
+      color: #fff;
+      box-shadow: 0 10px 28px rgba(179,0,24,.35);
     }
 
-    .card-title h3{
-      margin:0;
-      font-size:24px;
-      font-weight:900;
-      color:var(--gold-2);
-    }
+    .btn-primary:hover { transform: translateY(-2px); }
 
-    .badge{
-      padding:8px 12px;
-      border-radius:999px;
-      font-size:12px;
-      font-weight:700;
-      color:#f6ebc7;
-      border:1px solid rgba(255,215,120,.12);
-      background:rgba(255,215,120,.05);
+    .btn-secondary {
+      background: rgba(255,255,255,0.07);
+      color: var(--text);
+      border: 1px solid rgba(255,255,255,.10);
     }
 
-    .grid-2{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:14px;
+    .btn-full { width: 100%; }
+
+    .hero-badges {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin-top: 26px;
     }
 
-    .field{
-      margin-bottom:14px;
+    .badge {
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 18px;
+      padding: 16px;
+      text-align: center;
+      color: #f2f2f2;
+      font-weight: 700;
     }
 
-    .field label{
-      display:block;
-      margin-bottom:8px;
-      color:#ddcfaa;
-      font-size:14px;
-      font-weight:700;
+    .hero-side {
+      display: grid;
+      gap: 18px;
     }
 
-    .input, .select, .textarea{
-      width:100%;
-      border:none;
-      outline:none;
-      background:#0d0d0d;
-      color:var(--text);
-      border-radius:16px;
-      padding:15px 16px;
-      font-family:inherit;
-      font-size:15px;
-      border:1px solid rgba(255,215,120,.08);
-      transition:.2s;
+    .gallery-card {
+      padding: 22px;
     }
 
-    .input:focus, .select:focus, .textarea:focus{
-      border-color:rgba(255,215,120,.35);
-      box-shadow:0 0 0 4px rgba(212,175,55,.07);
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap: 12px;
+      min-height: 430px;
     }
 
-    .days-grid{
-      display:grid;
-      grid-template-columns:1fr;
-      gap:12px;
-      margin-top:8px;
+    .gallery-main,
+    .gallery-side {
+      display: grid;
+      gap: 12px;
     }
 
-    .day-card{
-      border:1px solid rgba(255,215,120,.08);
-      background:#0d0d0d;
-      border-radius:20px;
-      padding:16px;
-      transition:.2s;
-      cursor:pointer;
+    .gallery-side {
+      grid-template-columns: 1fr 1fr;
+      grid-auto-rows: 1fr;
     }
 
-    .day-card:hover{
-      border-color:rgba(255,215,120,.2);
-      transform:translateY(-2px);
+    .gallery-item {
+      border-radius: 22px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.08);
+      position: relative;
+      min-height: 130px;
+      background: #111;
     }
 
-    .day-card.active{
-      background:linear-gradient(180deg, rgba(212,175,55,.12), rgba(212,175,55,.04));
-      border-color:rgba(255,215,120,.34);
-      box-shadow:0 12px 28px rgba(212,175,55,.08);
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
 
-    .day-top{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:12px;
-      margin-bottom:10px;
+    .gallery-item::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 40%, rgba(0,0,0,.30));
+      pointer-events: none;
     }
 
-    .day-name{
-      font-size:18px;
-      font-weight:900;
-      color:var(--gold-2);
+    .quick-info {
+      padding: 22px;
+      display: grid;
+      grid-template-columns: repeat(2,1fr);
+      gap: 12px;
     }
 
-    .day-status{
-      font-size:12px;
-      font-weight:800;
-      padding:8px 12px;
-      border-radius:999px;
-      border:1px solid rgba(255,215,120,.12);
-      background:rgba(255,215,120,.05);
-      color:#f3e4b6;
+    .quick-info .item {
+      padding: 16px;
+      border-radius: 18px;
+      background: rgba(255,255,255,.05);
+      border: 1px solid rgba(255,255,255,.08);
     }
 
-    .day-periods{
-      display:flex;
-      flex-wrap:wrap;
-      gap:8px;
+    .quick-info .item span {
+      display: block;
+      color: var(--muted);
+      font-size: .93rem;
+      margin-bottom: 6px;
     }
 
-    .period{
-      padding:10px 12px;
-      border-radius:14px;
-      font-size:13px;
-      font-weight:700;
-      border:1px solid rgba(255,215,120,.08);
-      background:#121212;
-      color:#eee0bc;
+    .quick-info .item strong {
+      font-size: 1.05rem;
     }
+
+    section { padding: 28px 0; }
 
-    .period.available{
-      background:rgba(212,175,55,.08);
-      color:#f7ebc4;
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 12px;
+      margin-bottom: 18px;
     }
 
-    .period.booked{
-      opacity:.45;
-      text-decoration:line-through;
+    .section-head h2 {
+      margin: 0;
+      font-size: clamp(1.5rem, 3vw, 2.3rem);
+      font-weight: 900;
     }
 
-    .booking-foot{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:16px;
-      margin-top:18px;
-      flex-wrap:wrap;
+    .section-head p {
+      margin: 8px 0 0;
+      color: var(--muted);
+      line-height: 1.8;
+      max-width: 680px;
     }
 
-    .availability{
-      color:var(--muted);
-      font-size:14px;
+    .services-grid,
+    .pricing-grid,
+    .availability-grid,
+    .policy-grid {
+      display: grid;
+      gap: 16px;
     }
 
-    .contact-row{
-      display:flex;
-      flex-wrap:wrap;
-      gap:12px;
-      margin-top:16px;
+    .services-grid { grid-template-columns: repeat(4,1fr); }
+    .pricing-grid { grid-template-columns: repeat(2,1fr); }
+    .availability-grid { grid-template-columns: repeat(4,1fr); }
+    .policy-grid { grid-template-columns: repeat(3,1fr); }
+
+    .service-card,
+    .price-card,
+    .day-card,
+    .policy-card { padding: 22px; }
+
+    .service-icon {
+      width: 54px;
+      height: 54px;
+      display: grid;
+      place-items: center;
+      border-radius: 18px;
+      background: linear-gradient(135deg, rgba(226,26,50,.22), rgba(179,0,24,.26));
+      margin-bottom: 14px;
+      font-size: 1.08rem;
+      font-weight: 900;
     }
 
-    .contact-box{
-      flex:1;
-      min-width:220px;
-      padding:16px;
-      border-radius:18px;
-      background:#0d0d0d;
-      border:1px solid rgba(255,215,120,.08);
+    .service-card h3,
+    .price-card h3,
+    .form-card h3,
+    .contact-card h3,
+    .policy-card h3 {
+      margin: 0 0 10px;
+      font-size: 1.18rem;
+      font-weight: 800;
     }
 
-    .contact-box span{
-      display:block;
-      color:var(--muted);
-      font-size:13px;
-      margin-bottom:8px;
+    .service-card p,
+    .day-card p,
+    .muted,
+    .form-hint,
+    .policy-card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.8;
     }
 
-    .contact-box strong{
-      color:var(--gold-2);
-      font-size:20px;
-      font-weight:900;
+    .price-card {
+      position: relative;
+      overflow: hidden;
     }
 
-    .sections{
-      padding:8px 0 28px;
+    .price-card::before {
+      content: "";
+      position: absolute;
+      inset: auto auto -50px -50px;
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      background: rgba(226,26,50,.10);
+      filter: blur(8px);
     }
 
-    .sections-grid{
-      display:grid;
-      grid-template-columns:1.1fr .9fr;
-      gap:22px;
+    .price-label {
+      display: inline-block;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.07);
+      color: var(--gold);
+      font-weight: 700;
+      margin-bottom: 14px;
     }
 
-    .section-card{
-      padding:24px;
+    .price-list {
+      display: grid;
+      gap: 12px;
+      margin-top: 16px;
     }
 
-    .features{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:14px;
-      margin-top:10px;
+    .price-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 14px 16px;
+      border-radius: 16px;
+      background: rgba(255,255,255,.05);
+      border: 1px solid rgba(255,255,255,.08);
+      font-weight: 700;
     }
 
-    .feature{
-      padding:18px;
-      border-radius:22px;
-      background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.01));
-      border:1px solid rgba(255,215,120,.08);
+    .price-row span:last-child {
+      color: #fff;
+      font-weight: 900;
     }
+
+    .day-card { text-align: center; }
 
-    .feature strong{
-      display:block;
-      color:var(--gold-2);
-      font-size:18px;
-      margin-bottom:8px;
+    .day-card strong {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 1.06rem;
     }
 
-    .feature p{
-      margin:0;
-      color:#d7ccb0;
-      line-height:1.8;
-      font-size:14px;
+    .status {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-size: .92rem;
+      font-weight: 800;
+      margin-top: 10px;
     }
 
-    .gallery-card{
-      padding:18px;
+    .status.available {
+      background: rgba(54,179,91,.14);
+      color: #88ffac;
+      border: 1px solid rgba(54,179,91,.22);
     }
 
-    .gallery-grid{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:12px;
-      margin-top:8px;
+    .status.booked {
+      background: rgba(226,26,50,.14);
+      color: #ff9aaa;
+      border: 1px solid rgba(226,26,50,.22);
     }
 
-    .gallery-item{
-      position:relative;
-      min-height:180px;
-      border-radius:22px;
-      overflow:hidden;
-      border:1px solid rgba(255,215,120,.08);
-      background:#0d0d0d;
+    .status.pending {
+      background: rgba(245,176,65,.14);
+      color: #ffd58a;
+      border: 1px solid rgba(245,176,65,.22);
     }
 
-    .gallery-item img{
-      width:100%;
-      height:100%;
-      object-fit:cover;
-      display:block;
-      filter:brightness(.82);
-      transition:transform .45s;
+    .booking-wrap {
+      display: grid;
+      grid-template-columns: 1.12fr .88fr;
+      gap: 18px;
+      align-items: start;
     }
 
-    .gallery-item:hover img{
-      transform:scale(1.06);
+    .form-card,
+    .contact-card {
+      padding: 24px;
     }
 
-    .gallery-item span{
-      position:absolute;
-      right:14px;
-      bottom:14px;
-      background:rgba(0,0,0,.45);
-      color:#f7efda;
-      border:1px solid rgba(255,215,120,.1);
-      padding:8px 12px;
-      border-radius:999px;
-      font-size:12px;
-      font-weight:700;
-      backdrop-filter:blur(8px);
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(2,1fr);
+      gap: 14px;
+      margin-top: 18px;
     }
 
-    .testimonial-card{
-      margin-top:22px;
-      padding:24px;
+    .field {
+      display: grid;
+      gap: 8px;
     }
 
-    .testimonial{
-      padding:20px;
-      border-radius:22px;
-      background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.01));
-      border:1px solid rgba(255,215,120,.08);
+    .field.full { grid-column: 1 / -1; }
+
+    label {
+      font-size: .98rem;
+      color: #efefef;
+      font-weight: 700;
     }
 
-    .testimonial p{
-      margin:0 0 16px;
-      color:#eadfbe;
-      font-size:16px;
-      line-height:2;
+    input, select, textarea {
+      width: 100%;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.05);
+      color: white;
+      border-radius: 16px;
+      padding: 14px 15px;
+      font-family: inherit;
+      font-size: 1rem;
+      outline: none;
+      transition: border-color .2s ease, transform .2s ease;
     }
 
-    .testimonial strong{
-      color:var(--gold-2);
-      font-size:15px;
+    input:focus, select:focus, textarea:focus {
+      border-color: rgba(226,26,50,.85);
+      transform: translateY(-1px);
     }
 
-    .chat-toggle{
-      position:fixed;
-      left:24px;
-      bottom:24px;
-      z-index:80;
-      width:68px;
-      height:68px;
-      border:none;
-      border-radius:24px;
-      cursor:pointer;
-      font-size:24px;
-      color:#050505;
-      background:linear-gradient(135deg,var(--gold-2),var(--gold),#9c7419);
-      box-shadow:0 18px 40px rgba(212,175,55,.28);
+    textarea {
+      min-height: 120px;
+      resize: vertical;
     }
 
-    .chatbox{
-      position:fixed;
-      left:24px;
-      bottom:106px;
-      z-index:79;
-      width:min(390px, calc(100% - 32px));
-      background:linear-gradient(180deg, rgba(14,14,14,.98), rgba(8,8,8,.99));
-      border:1px solid rgba(255,215,120,.12);
-      border-radius:28px;
-      box-shadow:0 30px 80px rgba(0,0,0,.55);
-      overflow:hidden;
-      display:none;
+    .addons-box {
+      margin-top: 16px;
+      padding: 16px;
+      border-radius: 18px;
+      background: rgba(255,255,255,.05);
+      border: 1px solid rgba(255,255,255,.08);
     }
 
-    .chatbox.open{
-      display:block;
-      animation:up .22s ease;
+    .addon-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: center;
+      color: var(--muted);
+      line-height: 1.8;
     }
 
-    @keyframes up{
-      from{transform:translateY(18px); opacity:0}
-      to{transform:translateY(0); opacity:1}
+    .price-preview {
+      margin-top: 18px;
+      padding: 16px 18px;
+      border-radius: 18px;
+      background: linear-gradient(135deg, rgba(179,0,24,.16), rgba(255,255,255,.04));
+      border: 1px solid rgba(226,26,50,.24);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      font-weight: 800;
     }
 
-    .chat-head{
-      padding:18px 18px 14px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      background:linear-gradient(135deg, rgba(212,175,55,.12), rgba(255,255,255,.01));
-      border-bottom:1px solid rgba(255,215,120,.08);
+    .price-preview strong {
+      font-size: 1.3rem;
+      color: var(--gold);
     }
+
+    .notice {
+      margin-top: 14px;
+      padding: 14px 16px;
+      border-radius: 16px;
+      background: rgba(255,255,255,.05);
+      border: 1px dashed rgba(255,255,255,.14);
+      color: var(--muted);
+      line-height: 1.8;
+    }
+
+    .success-message {
+      display: none;
+      margin-top: 14px;
+      padding: 14px 16px;
+      border-radius: 16px;
+      background: rgba(56,193,114,.12);
+      border: 1px solid rgba(56,193,114,.25);
+      color: #a8ffd0;
+      line-height: 1.8;
+      font-weight: 700;
+    }
 
-    .chat-head h4{
-      margin:0;
-      font-size:18px;
-      color:var(--gold-2);
-      font-weight:900;
+    .form-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 18px;
     }
 
-    .chat-head span{
-      font-size:12px;
-      color:#e6dab5;
-      background:rgba(255,215,120,.08);
-      padding:7px 10px;
-      border-radius:999px;
-      border:1px solid rgba(255,215,120,.1);
+    .contact-list {
+      display: grid;
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .contact-item {
+      padding: 14px 16px;
+      border-radius: 18px;
+      background: rgba(255,255,255,.05);
+      border: 1px solid rgba(255,255,255,.08);
+      line-height: 1.8;
     }
 
-    .chat-body{
-      height:340px;
-      overflow:auto;
-      padding:16px;
-      display:flex;
-      flex-direction:column;
-      gap:10px;
-      background:
-        radial-gradient(circle at top left, rgba(212,175,55,.04), transparent 20%),
-        transparent;
-      scroll-behavior:smooth;
+    .footer {
+      padding: 24px 0 42px;
+      color: var(--muted);
     }
 
-    .msg{
-      max-width:86%;
-      padding:12px 14px;
-      border-radius:18px;
-      font-size:14px;
-      line-height:1.9;
-      white-space:pre-wrap;
+    .foot {
+      border-top: 1px solid rgba(255,255,255,.08);
+      padding-top: 22px;
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
     }
 
-    .msg.bot{
-      align-self:flex-start;
-      background:#121212;
-      border:1px solid rgba(255,215,120,.08);
-      color:#efe4c7;
+    .float-whatsapp {
+      position: fixed;
+      left: 18px;
+      bottom: 18px;
+      z-index: 60;
+      width: 62px;
+      height: 62px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      font-size: 1.45rem;
+      background: linear-gradient(135deg, var(--red), var(--red-2));
+      box-shadow: 0 12px 26px rgba(179,0,24,.38);
+      border: 1px solid rgba(255,255,255,.14);
+    }
+
+    .chat-toggle {
+      position: fixed;
+      bottom: 94px;
+      left: 18px;
+      width: 62px;
+      height: 62px;
+      border-radius: 50%;
+      border: none;
+      background: linear-gradient(135deg, var(--red), var(--red-2));
+      color: white;
+      font-size: 28px;
+      cursor: pointer;
+      box-shadow: 0 16px 30px rgba(179, 0, 24, 0.30);
+      z-index: 1001;
     }
 
-    .msg.user{
-      align-self:flex-end;
-      background:linear-gradient(135deg,var(--gold-2),var(--gold),#a87e1d);
-      color:#050505;
-      font-weight:700;
+    .chat-widget {
+      position: fixed;
+      bottom: 166px;
+      left: 18px;
+      width: 360px;
+      max-width: calc(100% - 30px);
+      background: rgba(255,255,255,0.97);
+      border-radius: 24px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.16);
+      overflow: hidden;
+      display: none;
+      z-index: 1000;
+      border: 1px solid rgba(220,220,220,0.95);
     }
 
-    .typing{
-      display:flex;
-      align-items:center;
-      gap:6px;
-      width:max-content;
-      padding:12px 14px;
-      border-radius:18px;
-      background:#121212;
-      border:1px solid rgba(255,215,120,.08);
-      align-self:flex-start;
+    .chat-header {
+      background: linear-gradient(135deg, #111, #b30018);
+      color: white;
+      padding: 16px;
+      font-weight: bold;
+      font-size: 16px;
     }
 
-    .typing span{
-      width:7px;
-      height:7px;
-      border-radius:50%;
-      background:#d8ba62;
-      animation:bounce 1s infinite ease-in-out;
+    .chat-sub {
+      font-size: 12px;
+      opacity: 0.9;
+      margin-top: 4px;
+      font-weight: normal;
     }
 
-    .typing span:nth-child(2){ animation-delay:.15s; }
-    .typing span:nth-child(3){ animation-delay:.3s; }
+    .chat-box {
+      height: 320px;
+      overflow-y: auto;
+      padding: 14px;
+      background: #f8f8f8;
+    }
 
-    @keyframes bounce{
-      0%,80%,100%{ transform:scale(.7); opacity:.4; }
-      40%{ transform:scale(1); opacity:1; }
+    .msg {
+      max-width: 85%;
+      padding: 10px 14px;
+      border-radius: 16px;
+      margin-bottom: 10px;
+      font-size: 14px;
+      line-height: 1.8;
+      white-space: pre-wrap;
     }
 
-    .chat-input{
-      padding:14px;
-      display:flex;
-      gap:10px;
-      border-top:1px solid rgba(255,215,120,.08);
-      background:rgba(0,0,0,.2);
+    .bot {
+      background: #f1f1f1;
+      color: #111;
+      margin-left: auto;
     }
 
-    .chat-input input{
-      flex:1;
-      border:none;
-      outline:none;
-      padding:14px 15px;
-      border-radius:16px;
-      font-family:inherit;
-      background:#0d0d0d;
-      color:#fff;
-      border:1px solid rgba(255,215,120,.08);
+    .user {
+      background: #ffe3e8;
+      color: #111;
+      margin-right: auto;
     }
 
-    .chat-input button{
-      border:none;
-      cursor:pointer;
-      padding:0 18px;
-      border-radius:16px;
-      font-family:inherit;
-      font-weight:900;
-      background:linear-gradient(135deg,var(--gold-2),var(--gold),#a57d1d);
-      color:#050505;
+    .chat-input {
+      display: flex;
+      gap: 8px;
+      padding: 12px;
+      border-top: 1px solid #ebebeb;
+      background: white;
     }
 
-    .toast{
-      position:fixed;
-      right:20px;
-      bottom:20px;
-      z-index:100;
-      padding:16px 18px;
-      border-radius:18px;
-      color:#f8f0da;
-      font-weight:700;
-      border:1px solid rgba(255,215,120,.12);
-      background:linear-gradient(180deg, rgba(18,18,18,.98), rgba(10,10,10,.98));
-      box-shadow:var(--shadow);
-      opacity:0;
-      transform:translateY(16px);
-      pointer-events:none;
-      transition:.25s;
+    .chat-input input {
+      flex: 1;
+      border: 1px solid #ddd;
+      border-radius: 12px;
+      padding: 12px;
+      outline: none;
+      font-size: 14px;
+      color: #111;
+      background: #fff;
     }
 
-    .toast.show{
-      opacity:1;
-      transform:translateY(0);
+    .chat-input button {
+      border: none;
+      border-radius: 12px;
+      padding: 12px 16px;
+      background: #b30018;
+      color: white;
+      cursor: pointer;
+      font-weight: bold;
     }
 
-    @media (max-width: 1024px){
+    @media (max-width: 1080px) {
       .hero-grid,
-      .sections-grid{
-        grid-template-columns:1fr;
+      .booking-wrap {
+        grid-template-columns: 1fr;
       }
-
-      .hero-main{
-        min-height:540px;
-      }
-
-      .hero-content h2{
-        font-size:50px;
-      }
+      .services-grid { grid-template-columns: repeat(3,1fr); }
+      .availability-grid { grid-template-columns: repeat(3,1fr); }
+      .policy-grid { grid-template-columns: 1fr 1fr; }
+      .gallery-grid { grid-template-columns: 1fr; min-height: auto; }
+      .gallery-side { grid-template-columns: 1fr 1fr; }
     }
 
-    @media (max-width: 640px){
-      .topbar-inner{
-        min-height:74px;
+    @media (max-width: 760px) {
+      .nav { flex-direction: column; align-items: stretch; }
+      .menu { justify-content: center; }
+      .hero-card { padding: 24px; min-height: auto; }
+      .hero-badges,
+      .services-grid,
+      .pricing-grid,
+      .quick-info,
+      .form-grid,
+      .availability-grid,
+      .policy-grid,
+      .gallery-side { grid-template-columns: 1fr; }
+      .section-head { align-items: start; }
+      .price-preview, .addon-row { flex-direction: column; align-items: start; }
+      .foot { flex-direction: column; }
+      .chat-widget {
+        left: 10px;
+        bottom: 160px;
+        width: calc(100% - 20px);
       }
-
-      .nav{
-        display:none;
-      }
-
-      .hero{
-        padding-top:20px;
-      }
-
-      .hero-main{
-        min-height:480px;
-        border-radius:28px;
-      }
-
-      .hero-content{
-        padding:24px;
-      }
-
-      .hero-content h2{
-        font-size:36px;
-      }
-
-      .hero-content p{
-        font-size:15px;
-      }
-
-      .info-card,
-      .features,
-      .grid-2,
-      .gallery-grid{
-        grid-template-columns:1fr;
-      }
-
-      .booking-card,
-      .section-card,
-      .gallery-card,
-      .testimonial-card{
-        border-radius:24px;
-      }
-
-      .chat-toggle{
-        width:60px;
-        height:60px;
-        border-radius:20px;
-      }
-
-      .contact-row{
-        flex-direction:column;
-      }
+      .float-whatsapp { left: 10px; bottom: 12px; }
+      .chat-toggle { left: 10px; bottom: 88px; }
     }
   </style>
 </head>
 <body>
-
-  <header class="topbar">
-    <div class="container topbar-inner">
-      <div class="brand">
-        <div class="brand-mark">O</div>
-        <div class="brand-text">
-          <h1>ORIAN RESORT</h1>
-          <p>LUXURY CHALETS EXPERIENCE</p>
-        </div>
-      </div>
-
-      <nav class="nav">
+  <div class="topbar">
+    <div class="container nav">
+      <a href="#top" class="brand">
+        <div class="brand-badge">ر</div>
+        <div>منتجع رمال</div>
+      </a>
+      <div class="menu">
+        <a href="#services">الخدمات</a>
+        <a href="#prices">الأسعار</a>
+        <a href="#availability">المواعيد</a>
         <a href="#booking">الحجز</a>
-        <a href="#details">المزايا</a>
-        <a href="#gallery">المعرض</a>
-      </nav>
+        <a href="#contact">التواصل</a>
+      </div>
     </div>
-  </header>
+  </div>
 
-  <main>
+  <main id="top">
     <section class="hero">
       <div class="container hero-grid">
-
-        <div class="hero-main">
-          <div class="hero-content">
-            <div class="eyebrow">رفاهية استثنائية • خصوصية عالية • تجربة ذهبية</div>
-            <h2>وجهتك الفاخرة<br>لأجمل الأوقات</h2>
-            <p>شاليهات Orian تقدم تجربة راقية بتصميم فاخر، مرافق مميزة، وأيام متاحة واضحة مع حجز سريع وتواصل مباشر عبر الواتساب.</p>
-            <div class="hero-actions">
-              <button class="btn btn-gold" onclick="document.getElementById('booking').scrollIntoView({behavior:'smooth'})">احجز الآن</button>
-              <a class="btn btn-whatsapp" href="https://wa.me/966500000000?text=السلام%20عليكم%20أبغى%20أستفسر%20عن%20الحجز%20في%20Orian%20Resort" target="_blank">واتساب مباشر</a>
-            </div>
+        <div class="hero-card">
+          <div class="eyebrow">خصوصية • راحة • حجز سريع</div>
+          <h1>منتجع رمال<br>تجربة راقية وحجز واضح</h1>
+          <p>
+            منتجع رمال يوفّر أجواء جميلة للعائلة والأصدقاء مع أسعار واضحة، خدمات متكاملة،
+          </p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#booking">ابدأ الحجز الآن</a>
+            <a class="btn btn-secondary" target="_blank" href="https://wa.me/966556662246?text=%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%20%D8%B9%D9%84%D9%8A%D9%83%D9%85%D8%8C%20%D8%A3%D8%A8%D9%8A%20%D8%A7%D9%84%D8%A7%D8%B3%D8%AA%D9%81%D8%B3%D8%A7%D8%B1%20%D8%B9%D9%86%20%D8%A7%D9%84%D8%AD%D8%AC%D8%B2%20%D9%81%D9%8A%20%D9%85%D9%86%D8%AA%D8%AC%D8%B9%20%D8%B1%D9%85%D8%A7%D9%84">تواصل واتساب</a>
+          </div>
+          <div class="hero-badges">
+            <div class="badge">واجهة فخمة</div>
+            <div class="badge">أسعار واضحة</div>
+            <div class="badge">حجز مباشر</div>
+            <div class="badge">تأكيد سريع</div>
           </div>
         </div>
 
         <div class="hero-side">
-          <div class="info-card">
-            <div class="mini-stat">
-              <span>التقييم العام</span>
-              <strong>4.9 / 5</strong>
-            </div>
-            <div class="mini-stat">
-              <span>عدد المرافق</span>
-              <strong>8 مزايا</strong>
-            </div>
-            <div class="mini-stat">
-              <span>أسعار تبدأ من</span>
-              <strong>550 ريال</strong>
-            </div>
-            <div class="mini-stat">
-              <span>التواصل المباشر</span>
-              <strong>24 / 7</strong>
+          <div class="gallery-card">
+            <div class="gallery-grid">
+              <div class="gallery-main">
+                <div class="gallery-item"><img src="images/hero.jpg" alt="صورة رئيسية"></div>
+              </div>
+              <div class="gallery-side">
+                <div class="gallery-item"><img src="images/chair.jpg" alt="صورة جلسة"></div>
+                <div class="gallery-item"><img src="images/night.jpg" alt="صورة ليلية"></div>
+                <div class="gallery-item"><img src="images/majlis1.jpg" alt="صورة مجلس"></div>
+                <div class="gallery-item"><img src="images/hero (2).jpg" alt="صورة إضافية"></div>
+              </div>
             </div>
           </div>
 
-          <div class="booking-card" id="booking">
-            <div class="card-title">
-              <h3>الحجز الفاخر</h3>
-              <div class="badge">أيام متاحة هذا الأسبوع</div>
+          <div class="card quick-info">
+            <div class="item">
+              <span>رقم الواتساب</span>
+              <strong>0556662246</strong>
             </div>
-
-            <div class="grid-2">
-              <div class="field">
-                <label>الاسم</label>
-                <input class="input" id="name" placeholder="اكتب الاسم الكامل">
-              </div>
-              <div class="field">
-                <label>رقم الجوال</label>
-                <input class="input" id="phone" placeholder="05xxxxxxxx">
-              </div>
+            <div class="item">
+              <span>نمط الحجز</span>
+              <strong>12 ساعة / 24 ساعة</strong>
             </div>
-
-            <div class="grid-2">
-              <div class="field">
-                <label>نوع الحجز</label>
-                <select class="select" id="type">
-                  <option>شاليه خاص</option>
-                  <option>مناسبة خاصة</option>
-                  <option>جلسة عائلية</option>
-                </select>
-              </div>
-              <div class="field">
-                <label>عدد الضيوف</label>
-                <select class="select" id="guests">
-                  <option>2 - 5 ضيوف</option>
-                  <option>6 - 10 ضيوف</option>
-                  <option>أكثر من 10</option>
-                </select>
-              </div>
+            <div class="item">
+              <span>أفضل سعر</span>
+              <strong>800 ريال</strong>
             </div>
-
-            <div class="field">
-              <label>الأيام والفترات المتاحة</label>
-              <div class="days-grid" id="daysGrid">
-                <div class="day-card" data-day="الأحد - الفترة المسائية">
-                  <div class="day-top">
-                    <div class="day-name">الأحد</div>
-                    <div class="day-status">متاح مساءً</div>
-                  </div>
-                  <div class="day-periods">
-                    <div class="period available">الفترة المسائية</div>
-                    <div class="period booked">الفترة الصباحية</div>
-                  </div>
-                </div>
-
-                <div class="day-card" data-day="الإثنين - الفترتان متاحتان">
-                  <div class="day-top">
-                    <div class="day-name">الإثنين</div>
-                    <div class="day-status">متاح بالكامل</div>
-                  </div>
-                  <div class="day-periods">
-                    <div class="period available">الفترة الصباحية</div>
-                    <div class="period available">الفترة المسائية</div>
-                  </div>
-                </div>
-
-                <div class="day-card" data-day="الثلاثاء - الفترة المسائية">
-                  <div class="day-top">
-                    <div class="day-name">الثلاثاء</div>
-                    <div class="day-status">متاح مساءً</div>
-                  </div>
-                  <div class="day-periods">
-                    <div class="period booked">الفترة الصباحية</div>
-                    <div class="period available">الفترة المسائية</div>
-                  </div>
-                </div>
-
-                <div class="day-card" data-day="الأربعاء - الفترة الصباحية">
-                  <div class="day-top">
-                    <div class="day-name">الأربعاء</div>
-                    <div class="day-status">متاح صباحاً</div>
-                  </div>
-                  <div class="day-periods">
-                    <div class="period available">الفترة الصباحية</div>
-                    <div class="period booked">الفترة المسائية</div>
-                  </div>
-                </div>
-
-                <div class="day-card" data-day="الخميس - متاح بالكامل">
-                  <div class="day-top">
-                    <div class="day-name">الخميس</div>
-                    <div class="day-status">متاح بالكامل</div>
-                  </div>
-                  <div class="day-periods">
-                    <div class="period available">الفترة الصباحية</div>
-                    <div class="period available">الفترة المسائية</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="field">
-              <label>ملاحظات إضافية</label>
-              <textarea class="textarea" id="notes" rows="4" placeholder="اكتب أي طلب إضافي"></textarea>
-            </div>
-
-            <div class="booking-foot">
-              <div class="availability">✔ اختر اليوم المناسب ثم أكمل بياناتك لتأكيد الطلب</div>
-              <button class="btn btn-gold" style="min-width:180px" onclick="bookNow()">تأكيد الحجز</button>
-            </div>
-
-            <div class="contact-row">
-              <div class="contact-box">
-                <span>رقم التواصل</span>
-                <strong>050 000 0000</strong>
-              </div>
-              <a class="btn btn-whatsapp" style="flex:1; min-width:220px;" href="https://wa.me/966500000000?text=السلام%20عليكم%20أبغى%20أحجز%20في%20Orian%20Resort" target="_blank">
-                التواصل عبر واتساب
-              </a>
+            <div class="item">
+              <span>إضافة خاصة</span>
+              <strong>ملعب صابوني 150 ريال</strong>
             </div>
           </div>
         </div>
-
       </div>
     </section>
 
-    <section class="sections" id="details">
-      <div class="container sections-grid">
-
-        <div class="section-card">
-          <div class="card-title">
-            <h3>مميزات الشاليه</h3>
-            <div class="badge">Luxury Features</div>
+    <section id="services">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2>الخدمات والمرافق</h2>
+            <p>كل ما يحتاجه العميل داخل المنتجع بشكل مرتب وواضح.</p>
           </div>
+        </div>
+        <div class="services-grid">
+          <div class="service-card"><div class="service-icon">رج</div><h3>مجلس رجال</h3><p>جلسة مرتبة ومريحة تناسب الاستقبال والضيافة.</p></div>
+          <div class="service-card"><div class="service-icon">حر</div><h3>مجلس حريم</h3><p>خصوصية عالية ومساحة مناسبة للعائلة والجلسات الهادئة.</p></div>
+          <div class="service-card"><div class="service-icon">مط</div><h3>مطبخ</h3><p>مطبخ مجهز يساعدكم على التحضير بسهولة أثناء فترة الحجز.</p></div>
+          <div class="service-card"><div class="service-icon">مل</div><h3>ملعب</h3><p>مساحة مناسبة للعب والأنشطة والحركة داخل المنتجع.</p></div>
+          <div class="service-card"><div class="service-icon">مس</div><h3>مسبح</h3><p>أجواء منعشة وتجربة ممتعة تناسب الاسترخاء والراحة.</p></div>
+          <div class="service-card"><div class="service-icon">ما</div><h3>ألعاب مائية</h3><p>إضافة ممتعة تعطي جوًا ترفيهيًا مميزًا داخل الحجز.</p></div>
+          <div class="service-card"><div class="service-icon">طف</div><h3>ألعاب أطفال</h3><p>خيارات مناسبة للصغار لزيادة المتعة وراحة العائلة.</p></div>
+          <div class="service-card"><div class="service-icon">صب</div><h3>ملعب صابوني</h3><p>إضافة خاصة بقيمة 150 ريال، وتتوفر فقط بعد وجود حجز مؤكد.</p></div>
+        </div>
+      </div>
+    </section>
 
-          <div class="features">
-            <div class="feature">
-              <strong>مسبح خاص</strong>
-              <p>مسبح أنيق يمنح الضيوف خصوصية كاملة وتجربة استرخاء مثالية طوال وقت الحجز.</p>
-            </div>
-            <div class="feature">
-              <strong>جلسات خارجية راقية</strong>
-              <p>جلسات مريحة بإضاءة ليلية فاخرة تناسب السهرات العائلية والأوقات الخاصة.</p>
-            </div>
-            <div class="feature">
-              <strong>صالة داخلية واسعة</strong>
-              <p>مساحة داخلية بتصميم عصري مريح مناسبة للراحة والاستقبال والأجواء الهادئة.</p>
-            </div>
-            <div class="feature">
-              <strong>مطبخ مجهز</strong>
-              <p>مطبخ متكامل يوفّر كل الأساسيات لراحة الضيوف وتجربة أكثر سهولة أثناء الإقامة.</p>
-            </div>
-            <div class="feature">
-              <strong>خصوصية عالية</strong>
-              <p>تصميم يراعي الخصوصية بشكل كامل ليشعر الضيف بالراحة من أول لحظة حتى نهاية الحجز.</p>
-            </div>
-            <div class="feature">
-              <strong>مواقف مريحة</strong>
-              <p>مواقف سيارات سهلة وقريبة من المدخل لتجربة وصول ودخول أكثر سلاسة وأناقة.</p>
+    <section id="prices">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2>الأسعار</h2>
+            <p>الأسعار مرتبة حسب مدة الحجز ونوع اليوم.</p>
+          </div>
+        </div>
+        <div class="pricing-grid">
+          <div class="price-card">
+            <div class="price-label">حجز 12 ساعة</div>
+            <h3>أسعار نصف يوم</h3>
+            <div class="price-list">
+              <div class="price-row"><span>وسط الأسبوع</span><span>800 ريال</span></div>
+              <div class="price-row"><span>نهاية الأسبوع</span><span>950 ريال</span></div>
+              <div class="price-row"><span>الأعياد</span><span>1200 ريال</span></div>
             </div>
           </div>
-
-          <div class="testimonial-card">
-            <div class="card-title" style="margin-bottom:14px">
-              <h3 style="font-size:22px">آراء الضيوف</h3>
-              <div class="badge">Premium Experience</div>
-            </div>
-            <div class="testimonial">
-              <p>“المكان فعلاً فخم، الجلسات ممتازة والخصوصية عالية جداً، والحجز كان واضح وسهل من أول دقيقة.”</p>
-              <strong>ضيف من المنطقة الشرقية</strong>
+          <div class="price-card">
+            <div class="price-label">حجز 24 ساعة</div>
+            <h3>أسعار يوم كامل</h3>
+            <div class="price-list">
+              <div class="price-row"><span>وسط الأسبوع</span><span>1300 ريال</span></div>
+              <div class="price-row"><span>نهاية الأسبوع</span><span>1700 ريال</span></div>
+              <div class="price-row"><span>الأعياد</span><span>2200 ريال</span></div>
             </div>
           </div>
         </div>
+      </div>
+    </section>
 
-        <div>
-          <div class="gallery-card" id="gallery">
-            <div class="card-title">
-              <h3>المعرض</h3>
-              <div class="badge">Orian Moments</div>
-            </div>
-
-            <div class="gallery-grid">
-              <div class="gallery-item">
-                <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1200&q=80" alt="">
-                <span>الواجهة الرئيسية</span>
-              </div>
-              <div class="gallery-item">
-                <img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1201&q=80" alt="">
-                <span>جلسة داخلية</span>
-              </div>
-              <div class="gallery-item">
-                <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1202&q=80" alt="">
-                <span>أجواء خارجية</span>
-              </div>
-              <div class="gallery-item">
-                <img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1203&q=80" alt="">
-                <span>تفاصيل فاخرة</span>
-              </div>
-            </div>
+    <section>
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2>سياسة الحجز</h2>
+            <p>معلومات واضحة للعميل قبل إرسال الطلب.</p>
           </div>
         </div>
+        <div class="policy-grid">
+          <div class="policy-card"><h3>تأكيد الحجز</h3><p>لا يتم تأكيد الحجز إلا بعد دفع العربون ومراجعة الطلب من الإدارة.</p></div>
+          <div class="policy-card"><h3>العربون</h3><p>يظهر المبلغ المتبقي تلقائيًا داخل النموذج قبل إرسال طلب الحجز.</p></div>
+          <div class="policy-card"><h3>الإضافات</h3><p>الملعب الصابوني خدمة إضافية بقيمة 150 ريال، ولا يتم تفعيله إلا بعد تأكيد الحجز.</p></div>
+        </div>
+      </div>
+    </section>
 
+    <section id="availability">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2>المواعيد الحالية</h2>
+            <p>الحالة تظهر مباشرة حسب البيانات الموجودة في قاعدة الحجوزات.</p>
+          </div>
+        </div>
+        <div class="availability-grid" id="availabilityGrid"></div>
+      </div>
+    </section>
+
+    <section id="booking">
+      <div class="container booking-wrap">
+        <div class="form-card">
+          <h3>طلب حجز جديد</h3>
+          <p class="form-hint">أدخل البيانات بدقة، وسيتم حفظ الطلب ثم فتح الواتساب مباشرة.</p>
+
+          <form id="bookingForm">
+            <div class="form-grid">
+              <div class="field">
+                <label for="name">الاسم</label>
+                <input id="name" name="name" type="text" placeholder="اكتب الاسم" required>
+              </div>
+
+              <div class="field">
+                <label for="phone">رقم الجوال</label>
+                <input id="phone" name="phone" type="tel" placeholder="05xxxxxxxx" required>
+              </div>
+
+              <div class="field">
+                <label for="date">تاريخ الحجز</label>
+                <input id="date" name="date" type="date" required>
+              </div>
+
+              <div class="field">
+                <label for="duration">مدة الحجز</label>
+                <select id="duration" name="duration" required>
+                  <option value="12">12 ساعة</option>
+                  <option value="24">24 ساعة</option>
+                </select>
+              </div>
+
+              <div class="field">
+                <label for="dayType">نوع اليوم</label>
+                <select id="dayType" name="dayType" required>
+                  <option value="weekday">وسط الأسبوع</option>
+                  <option value="weekend">نهاية الأسبوع</option>
+                  <option value="holiday">الأعياد</option>
+                </select>
+              </div>
+
+              <div class="field">
+                <label for="deposit">العربون</label>
+                <input id="deposit" name="deposit" type="number" min="0" placeholder="مثال: 300">
+              </div>
+
+              <div class="field full">
+                <label for="notes">ملاحظات إضافية</label>
+                <textarea id="notes" name="notes" placeholder="أي تفاصيل إضافية يكتبها العميل"></textarea>
+              </div>
+            </div>
+
+            <div class="addons-box">
+              <div class="addon-row">
+                <div>
+                  <strong style="display:block; margin-bottom:6px; color:#fff;">الإضافات</strong>
+                  <span class="muted">الملعب الصابوني متاح فقط بعد تأكيد الحجز من الإدارة.</span>
+                </div>
+                <strong style="color:var(--gold);">150 ريال</strong>
+              </div>
+            </div>
+
+            <div class="price-preview">
+              <div>
+                <div class="muted">السعر المتوقع للحجز</div>
+                <strong id="finalPrice">800 ريال</strong>
+              </div>
+              <div class="muted" id="remainingText">المتبقي بعد العربون يظهر هنا</div>
+            </div>
+
+            <div class="notice">عند الضغط على إرسال، يتم حفظ الحجز في النظام ثم تحويلك للواتساب مباشرة.</div>
+            <div class="success-message" id="successMessage">تم حفظ الطلب بنجاح، ويتم الآن تحويلك للواتساب.</div>
+
+            <div class="form-actions">
+              <button type="submit" class="btn btn-primary">إرسال طلب الحجز</button>
+              <button type="button" class="btn btn-secondary" id="copyReceiptBtn">نسخ نص وصل العربون</button>
+            </div>
+          </form>
+        </div>
+
+        <div class="contact-card" id="contact">
+          <h3>التواصل المباشر</h3>
+          <p class="form-hint">في حال وجود استفسار سريع، تواصل معنا مباشرة عبر الواتساب.</p>
+          <div class="contact-list">
+            <div class="contact-item"><strong>رقم الواتساب:</strong><br>0556662246</div>
+            <div class="contact-item"><strong>مواعيد الحجز:</strong><br>12 ساعة أو 24 ساعة حسب رغبة العميل.</div>
+            <div class="contact-item"><strong>ملاحظة:</strong><br>تأكيد الحجز النهائي يتم بعد مراجعة الطلب من الإدارة.</div>
+          </div>
+          <div style="margin-top:16px;">
+            <a class="btn btn-primary btn-full" target="_blank" href="https://wa.me/966556662246?text=%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%20%D8%B9%D9%84%D9%8A%D9%83%D9%85%D8%8C%20%D8%A3%D8%A8%D9%8A%20%D8%A7%D9%84%D8%A7%D8%B3%D8%AA%D9%81%D8%B3%D8%A7%D8%B1%20%D8%B9%D9%86%20%D8%A7%D9%84%D8%AD%D8%AC%D8%B2%20%D9%81%D9%8A%20%D9%85%D9%86%D8%AA%D8%AC%D8%B9%20%D8%B1%D9%85%D8%A7%D9%84">فتح الواتساب</a>
+          </div>
+        </div>
       </div>
     </section>
   </main>
 
-  <button class="chat-toggle" onclick="toggleChat()">✦</button>
+  <footer class="footer">
+    <div class="container foot">
+      <div>منتجع رمال</div>
+      <div>جاهز للحجز والتواصل المباشر</div>
+    </div>
+  </footer>
 
-  <div class="chatbox" id="chatbox">
-    <div class="chat-head">
-      <h4>مساعد Orian AI</h4>
-      <span>متصل الآن</span>
+  <button class="chat-toggle" onclick="toggleChat()">💬</button>
+
+  <div class="chat-widget" id="chatWidget">
+    <div class="chat-header">
+      مساعد منتجع رمال
+      <div class="chat-sub">اسأل عن الأسعار أو الخدمات أو الحجز</div>
     </div>
 
-    <div class="chat-body" id="chatBody">
-      <div class="msg bot">مرحباً بك في Orian Resort، أنا مساعدك الذكي داخل الموقع. أقدر أفهم استفسارك وأرد عليك بطريقة واضحة واحترافية بخصوص الحجز والأسعار والمرافق والأيام المتاحة.</div>
+    <div class="chat-box" id="chatBox">
+      <div class="msg bot">ياهلا وسهلا، أنا مساعد منتجع رمال. كيف أقدر أخدمك؟</div>
     </div>
 
     <div class="chat-input">
-      <input id="chatInput" placeholder="اكتب سؤالك هنا">
+      <input type="text" id="chatInput" placeholder="اكتب سؤالك هنا...">
       <button onclick="sendMessage()">إرسال</button>
     </div>
   </div>
 
-  <div class="toast" id="toast">تم تأكيد طلب الحجز بنجاح</div>
+  <a class="float-whatsapp" target="_blank" href="https://wa.me/966556662246?text=%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%20%D8%B9%D9%84%D9%8A%D9%83%D9%85%D8%8C%20%D8%A3%D8%A8%D9%8A%20%D8%A3%D8%AD%D8%AC%D8%B2%20%D9%81%D9%8A%20%D9%85%D9%86%D8%AA%D8%AC%D8%B9%20%D8%B1%D9%85%D8%A7%D9%84" aria-label="واتساب">✆</a>
 
   <script>
-    let selectedDay = "";
-    const resortPhoneDisplay = "050 000 0000";
-    const resortPhoneWa = "966500000000";
-
-    const memory = {
-      userName: "",
-      phone: "",
-      guests: "",
-      type: "",
-      selectedDay: "",
-      notes: "",
-      lastTopic: ""
+    const prices = {
+      12: { weekday: 800, weekend: 950, holiday: 1200 },
+      24: { weekday: 1300, weekend: 1700, holiday: 2200 }
     };
 
-    document.querySelectorAll(".day-card").forEach(card => {
-      card.addEventListener("click", () => {
-        document.querySelectorAll(".day-card").forEach(c => c.classList.remove("active"));
-        card.classList.add("active");
-        selectedDay = card.dataset.day;
-        memory.selectedDay = selectedDay;
-      });
+    const duration = document.getElementById('duration');
+    const dayType = document.getElementById('dayType');
+    const deposit = document.getElementById('deposit');
+    const finalPrice = document.getElementById('finalPrice');
+    const remainingText = document.getElementById('remainingText');
+    const copyReceiptBtn = document.getElementById('copyReceiptBtn');
+
+    function getPrice() {
+      return prices[duration.value][dayType.value];
+    }
+
+    function updatePrice() {
+      const total = getPrice();
+      const depositValue = Number(deposit.value || 0);
+      const remaining = Math.max(total - depositValue, 0);
+      finalPrice.textContent = `${total} ريال`;
+      remainingText.textContent = depositValue > 0
+        ? `العربون: ${depositValue} ريال • المتبقي: ${remaining} ريال`
+        : 'أضف العربون وسيظهر المتبقي هنا';
+    }
+
+    function buildReceiptText() {
+      const name = document.getElementById('name').value || '---';
+      const phone = document.getElementById('phone').value || '---';
+      const date = document.getElementById('date').value || '---';
+      const durationText = duration.options[duration.selectedIndex].text;
+      const dayTypeText = dayType.options[dayType.selectedIndex].text;
+      const total = getPrice();
+      const depositValue = Number(deposit.value || 0);
+      const remaining = Math.max(total - depositValue, 0);
+
+      return `وصل عربون - منتجع رمال\n\nالاسم: ${name}\nرقم الجوال: ${phone}\nتاريخ الحجز: ${date}\nمدة الحجز: ${durationText}\nنوع اليوم: ${dayTypeText}\nإجمالي السعر: ${total} ريال\nالعربون: ${depositValue} ريال\nالمتبقي: ${remaining} ريال`;
+    }
+
+    duration.addEventListener('change', updatePrice);
+    dayType.addEventListener('change', updatePrice);
+    deposit.addEventListener('input', updatePrice);
+
+    copyReceiptBtn.addEventListener('click', async () => {
+      const text = buildReceiptText();
+      try {
+        await navigator.clipboard.writeText(text);
+        copyReceiptBtn.textContent = 'تم نسخ وصل العربون';
+        setTimeout(() => {
+          copyReceiptBtn.textContent = 'نسخ نص وصل العربون';
+        }, 1800);
+      } catch {
+        alert(text);
+      }
     });
 
-    function syncMemoryFromForm(){
-      memory.userName = document.getElementById("name").value.trim();
-      memory.phone = document.getElementById("phone").value.trim();
-      memory.guests = document.getElementById("guests").value;
-      memory.type = document.getElementById("type").value;
-      memory.notes = document.getElementById("notes").value.trim();
-      memory.selectedDay = selectedDay;
+    updatePrice();
+
+    function addMessage(text, sender) {
+      const chatBox = document.getElementById('chatBox');
+      const message = document.createElement('div');
+      message.className = `msg ${sender}`;
+      message.textContent = text;
+      chatBox.appendChild(message);
+      chatBox.scrollTop = chatBox.scrollHeight;
     }
 
-    function showToast(text){
-      const toast = document.getElementById("toast");
-      toast.textContent = text;
-      toast.classList.add("show");
-      clearTimeout(window.toastTimer);
-      window.toastTimer = setTimeout(() => {
-        toast.classList.remove("show");
-      }, 2600);
-    }
+    async function getBotReply(message) {
+      try {
+        const res = await fetch('/api/chat', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ message })
+        });
 
-    function bookNow(){
-      syncMemoryFromForm();
-      const name = memory.userName;
-      const phone = memory.phone;
+        const data = await res.json();
 
-      if(!name || !phone || !memory.selectedDay){
-        showToast("أكمل الاسم والجوال واختر اليوم المناسب");
-        return;
-      }
-
-      showToast("تم تأكيد طلب الحجز بنجاح");
-    }
-
-    function toggleChat(){
-      document.getElementById("chatbox").classList.toggle("open");
-    }
-
-    function addMessage(text, type){
-      const body = document.getElementById("chatBody");
-      const div = document.createElement("div");
-      div.className = `msg ${type}`;
-      div.textContent = text;
-      body.appendChild(div);
-      body.scrollTop = body.scrollHeight;
-    }
-
-    function addTyping(){
-      const body = document.getElementById("chatBody");
-      const typing = document.createElement("div");
-      typing.className = "typing";
-      typing.id = "typingIndicator";
-      typing.innerHTML = "<span></span><span></span><span></span>";
-      body.appendChild(typing);
-      body.scrollTop = body.scrollHeight;
-    }
-
-    function removeTyping(){
-      const el = document.getElementById("typingIndicator");
-      if(el) el.remove();
-    }
-
-    function fillBookingSample(){
-      document.getElementById("name").value = "عبدالله";
-      document.getElementById("phone").value = "05xxxxxxxx";
-      document.getElementById("notes").value = "أبغى تجهيز بسيط قبل الوصول";
-      document.getElementById("booking").scrollIntoView({behavior:"smooth"});
-      syncMemoryFromForm();
-    }
-
-    function goToWhatsapp(customText){
-      const url = `https://wa.me/${resortPhoneWa}?text=${encodeURIComponent(customText)}`;
-      window.open(url, "_blank");
-    }
-
-    function getAvailabilityText(){
-      return "حالياً عندنا الأحد متاح في الفترة المسائية، والإثنين متاح بالكامل، والثلاثاء متاح في الفترة المسائية، والأربعاء متاح في الفترة الصباحية، والخميس متاح بالكامل.";
-    }
-
-    function getFeaturesText(){
-      return "الشاليه يضم مسبح خاص، جلسات خارجية راقية، صالة داخلية واسعة، مطبخ مجهز، خصوصية عالية، ومواقف مريحة للضيوف.";
-    }
-
-    function smartIntro(){
-      const intros = [
-        "أكيد، ",
-        "طبعاً، ",
-        "أكيد يا هلا، ",
-        "يسعدني أوضح لك، ",
-        "بكل سرور، "
-      ];
-      return intros[Math.floor(Math.random() * intros.length)];
-    }
-
-    function smartEnding(){
-      const endings = [
-        " وإذا حبيت أكمل معك خطوة بخطوة أنا حاضر.",
-        " وإذا ودك أساعدك في الحجز مباشرة أقدر أوجهك.",
-        " وإذا عندك استفسار ثاني عن الشاليه أنا موجود.",
-        " وإذا رغبت أشرح لك بشكل أدق أكثر أنا جاهز.",
-        " وإذا حاب أكمل معك للتأكيد أو الواتساب أقدر."
-      ];
-      return endings[Math.floor(Math.random() * endings.length)];
-    }
-
-    function getSmartReply(message){
-      syncMemoryFromForm();
-      const text = message.toLowerCase().trim();
-
-      const wantsPrice = /سعر|الأسعار|بكم|كم/.test(text);
-      const wantsContact = /رقم|تواصل|جوال|هاتف|اتصال/.test(text);
-      const wantsWhatsapp = /واتساب|واتس|whatsapp/.test(text);
-      const wantsFeatures = /مميزات|خدمات|مرافق|فيه|يوجد/.test(text);
-      const wantsAvailability = /يوم|أيام|متاح|المتاح|فاضي|متى متاح|وش المتاح|ايش المتاح/.test(text);
-      const wantsBooking = /حجز|احجز|أبغى أحجز|ابي احجز|طريقة الحجز|كيف أحجز|كيف احجز|ابغى حجز/.test(text);
-      const asksName = /اسمك|من أنت|مين أنت|من انت/.test(text);
-      const thanks = /شكرا|مشكور|يعطيك العافيه|يعطيك العافية/.test(text);
-      const greeting = /السلام|هلا|اهلا|مرحبا|يا هلا/.test(text);
-
-      if (asksName) {
-        memory.lastTopic = "identity";
-        return "أنا مساعد Orian AI، انا هنت عشان أساعدك بايش حاب اخدمك .";
-      }
-
-      if (greeting) {
-        memory.lastTopic = "greeting";
-        return "ياهلا وسهلا بك في Orian Resort، نورت المكان. اكتب أي استفسار عندك وأنا أجاوبك مباشرة بطريقة واضحة ومختصرة أو مفصلة حسب طلبك.";
-      }
-
-      if (wantsPrice) {
-        memory.lastTopic = "price";
-        return smartIntro() + "الأسعار تبدأ من 550 ريال، وتختلف حسب نوع الحجز واليوم والفترة المختارة. لو حبيت أقدر أوضح لك السعر الأقرب بناءً على اليوم اللي يناسبك." + smartEnding();
-      }
-
-      if (wantsContact && wantsWhatsapp) {
-        memory.lastTopic = "contact";
-        return smartIntro() + `رقم الواتساب المباشر هو ${resortPhoneDisplay}، وتقدر أيضاً تضغط على زر الواتساب الموجود في الصفحة للتواصل الفوري مع إدارة الحجز.` + smartEnding();
-      }
-
-      if (wantsContact) {
-        memory.lastTopic = "contact";
-        return smartIntro() + `رقم التواصل المباشر هو ${resortPhoneDisplay}. وإذا رغبت أقدر أوجهك مباشرة إلى الواتساب حتى يكون التواصل أسرع وأسهل.` + smartEnding();
-      }
-
-      if (wantsWhatsapp) {
-        memory.lastTopic = "whatsapp";
-        return smartIntro() + "عندك زر واتساب مباشر داخل الموقع، ومن خلاله تقدر ترسل استفسارك أو تطلب الحجز بشكل سريع بدون أي خطوات معقدة." + smartEnding();
-      }
-
-      if (wantsFeatures) {
-        memory.lastTopic = "features";
-        return smartIntro() + getFeaturesText() + " المكان مصمم بحيث يجمع بين الراحة والفخامة والخصوصية في نفس الوقت." + smartEnding();
-      }
-
-      if (wantsAvailability) {
-        memory.lastTopic = "availability";
-        return smartIntro() + getAvailabilityText() + " وإذا حبيت، أقدر أساعدك تختار اليوم الأنسب حسب نوع المناسبة أو عدد الضيوف." + smartEnding();
-      }
-
-      if (wantsBooking) {
-        memory.lastTopic = "booking";
-        if (memory.selectedDay && memory.userName && memory.phone) {
-          return smartIntro() + `بياناتك الحالية شبه مكتملة، واليوم المختار حالياً هو ${memory.selectedDay}. بقي عليك فقط الضغط على زر تأكيد الحجز لإرسال الطلب بشكل مباشر.` + smartEnding();
+        if (!res.ok) {
+          return data?.error || 'تعذر الرد الآن، حاول مرة ثانية.';
         }
-        if (memory.selectedDay) {
-          return smartIntro() + `تم اختيار ${memory.selectedDay} كخيار حالي. الآن فقط اكتب الاسم ورقم الجوال ثم اضغط على تأكيد الحجز لإكمال الطلب.` + smartEnding();
-        }
-        return smartIntro() + "طريقة الحجز بسيطة جداً: اختر اليوم المناسب من جدول التوفر، ثم اكتب الاسم ورقم الجوال، وبعدها اضغط على تأكيد الحجز. بعد ذلك يتم التواصل معك لاستكمال التفاصيل إذا لزم الأمر." + smartEnding();
-      }
 
-      if (/وش اخترت|ايش اخترت|اليوم المختار|اختياري/.test(text)) {
-        memory.lastTopic = "selected";
-        return memory.selectedDay
-          ? `اختيارك الحالي هو ${memory.selectedDay}. إذا كان هذا الوقت مناسب لك، أكمل فقط بيانات الاسم ورقم الجوال ثم أكد الحجز.`
-          : "حتى الآن ما تم تحديد يوم. اختر اليوم المناسب من جدول التوفر، وبعدها أقدر أكمل معك بسهولة.";
-      }
-
-      if (/املأ|عبي|جهز البيانات|جرب الحجز/.test(text)) {
-        memory.lastTopic = "fill";
-        fillBookingSample();
-        return "تم تجهيز بيانات تجريبية داخل نموذج الحجز حتى تشوف التجربة بشكل أوضح. تقدر الآن تختار اليوم المناسب وتكمل مباشرة.";
-      }
-
-      if (/مسبح/.test(text)) {
-        memory.lastTopic = "pool";
-        return smartIntro() + "نعم، الشاليه يحتوي على مسبح خاص يمنح الضيوف خصوصية عالية وأجواء راقية، وهو من أبرز المزايا التي تميز التجربة داخل Orian Resort." + smartEnding();
-      }
-
-      if (/خصوصية/.test(text)) {
-        memory.lastTopic = "privacy";
-        return smartIntro() + "الخصوصية من أهم النقاط التي تم الاهتمام بها في الشاليه، سواء من ناحية التصميم أو توزيع الجلسات، حتى يشعر الضيف براحة كاملة طوال فترة الحجز." + smartEnding();
-      }
-
-      if (/صباح/.test(text) || /مساء/.test(text)) {
-        memory.lastTopic = "availability";
-        return smartIntro() + getAvailabilityText() + smartEnding();
-      }
-
-      if (thanks) {
-        memory.lastTopic = "thanks";
-        return "على الرحب والسعة، يسعدني دائماً مساعدتك. إذا حبيت أكمل معك بالحجز أو أوضح لك أي نقطة ثانية عن الشاليه فأنا حاضر.";
-      }
-
-      if (/وش عندكم|عرفني|نبذة|تكلم عن الشاليه/.test(text)) {
-        memory.lastTopic = "overview";
-        return "Orian Resort يقدم تجربة شاليه فاخرة بطابع راقٍ، ويجمع بين المسبح الخاص، الجلسات الخارجية، الصالة الداخلية الواسعة، والخصوصية العالية، مع نظام حجز واضح وتواصل سريع عبر الواتساب.";
-      }
-
-      if (/وش تنصح|وش الأفضل|اي يوم أفضل|وش اليوم المناسب/.test(text)) {
-        memory.lastTopic = "advice";
-        return "إذا كنت تبحث عن مرونة أكبر فالإثنين والخميس ممتازان لأنهما متاحان بالكامل، أما إذا كنت تفضل فترة محددة وسريعة فالأحد أو الثلاثاء في الفترة المسائية خيارات جميلة جداً.";
-      }
-
-      if (/عندي مناسبه|عندي مناسبة|عيد ميلاد|اجتماع|عائله|عائلة/.test(text)) {
-        memory.lastTopic = "occasion";
-        return "ممتاز، الشاليه مناسب جداً للمناسبات الخاصة والجلسات العائلية، خصوصاً مع توفر الجلسات الخارجية والصالة الداخلية الواسعة. إذا ودك أساعدك أختار لك أنسب يوم حسب المناسبة أنا جاهز.";
-      }
-
-      if (memory.lastTopic === "price") {
-        return "إذا كان هدفك معرفة تكلفة أقرب للحجز الفعلي، اذكر لي اليوم أو نوع المناسبة وأنا أجاوبك بصياغة أدق داخل نفس السياق.";
-      }
-
-      if (memory.lastTopic === "availability") {
-        return "أقدر أيضاً أوضح لك أي الأيام أنسب من ناحية المرونة أو أرتب لك طريقة الحجز خطوة بخطوة إذا رغبت.";
-      }
-
-      return "أفهم عليك. أنا هنا كمساعد ذكي داخل Orian Resort، وأقدر أجاوبك عن الأسعار، المرافق، الأيام المتاحة، رقم التواصل، أو طريقة الحجز بشكل واضح واحترافي. اكتب سؤالك بأي أسلوب يناسبك وأنا أتعامل معه مباشرة.";
-    }
-
-    function maybeDoAction(message){
-      const text = message.toLowerCase().trim();
-
-      if (/واتساب|حولني واتساب|تواصل واتساب/.test(text)) {
-        setTimeout(() => {
-          goToWhatsapp("السلام عليكم، أبغى أستفسر عن الحجز في Orian Resort");
-        }, 500);
-      }
-
-      if (/أبغى أحجز الآن|احجز لي|ثبت الحجز|أكيد الحجز/.test(text)) {
-        setTimeout(() => {
-          document.getElementById("booking").scrollIntoView({behavior:"smooth"});
-        }, 400);
+        return data?.reply || 'تعذر الرد الآن، حاول مرة ثانية.';
+      } catch (err) {
+        return 'صار خطأ مؤقت في المساعد، حاول مرة ثانية.';
       }
     }
 
-    function sendMessage(){
-      const input = document.getElementById("chatInput");
-      const value = input.value.trim();
-      if(!value) return;
+    window.toggleChat = function () {
+      const chat = document.getElementById('chatWidget');
+      chat.style.display = chat.style.display === 'block' ? 'none' : 'block';
+    };
 
-      addMessage(value, "user");
-      input.value = "";
-      addTyping();
+    window.sendMessage = async function () {
+      const input = document.getElementById('chatInput');
+      const text = input.value.trim();
 
-      const reply = getSmartReply(value);
-      maybeDoAction(value);
+      if (!text) return;
 
-      setTimeout(() => {
-        removeTyping();
-        addMessage(reply, "bot");
-      }, 700);
-    }
+      addMessage(text, 'user');
+      input.value = '';
 
-    document.getElementById("chatInput").addEventListener("keydown", function(e){
-      if(e.key === "Enter"){
-        sendMessage();
+      addMessage('...جاري الرد', 'bot');
+
+      const chatBox = document.getElementById('chatBox');
+      const loadingMsg = chatBox.lastElementChild;
+
+      const reply = await getBotReply(text);
+
+      if (loadingMsg) {
+        loadingMsg.remove();
+      }
+
+      addMessage(reply, 'bot');
+    };
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const input = document.getElementById('chatInput');
+      if (input) {
+        input.addEventListener('keypress', function (e) {
+          if (e.key === 'Enter') {
+            e.preventDefault();
+            window.sendMessage();
+          }
+        });
       }
     });
+  </script>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import { getFirestore, addDoc, collection, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyBrsONe6O8Uqsczbuz3aBQyhfU2I9lfMAo",
+      authDomain: "alrimal2.firebaseapp.com",
+      projectId: "alrimal2",
+      storageBucket: "alrimal2.firebasestorage.app",
+      messagingSenderId: "886389694053",
+      appId: "1:886389694053:web:f03c204e9557d00778308c"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    const bookingForm = document.getElementById('bookingForm');
+    const availabilityGrid = document.getElementById('availabilityGrid');
+    const successMessage = document.getElementById('successMessage');
+
+    async function loadAvailability() {
+      try {
+        const q = query(collection(db, 'bookings'), orderBy('date', 'asc'));
+        const snapshot = await getDocs(q);
+
+        const bookings = snapshot.docs
+          .map(doc => ({ id: doc.id, ...doc.data() }))
+          .filter(item => item.status !== 'cancelled');
+
+        if (!bookings.length) {
+          availabilityGrid.innerHTML = `
+            <div class="day-card">
+              <strong>لا توجد حجوزات حالياً</strong>
+              <p>كل الأيام متاحة</p>
+              <div class="status available">متاح</div>
+            </div>
+          `;
+          return;
+        }
+
+        availabilityGrid.innerHTML = bookings.map(item => `
+          <div class="day-card">
+            <strong>${item.date}</strong>
+            <p>${item.name}</p>
+            <div class="status ${item.status === 'confirmed' ? 'booked' : 'pending'}">
+              ${item.status === 'confirmed' ? 'محجوز' : 'بانتظار'}
+            </div>
+          </div>
+        `).join('');
+      } catch (error) {
+        availabilityGrid.innerHTML = `
+          <div class="day-card">
+            <strong>تعذر تحميل المواعيد</strong>
+            <p>تأكد من إعدادات قاعدة البيانات</p>
+            <div class="status pending">مراجعة مطلوبة</div>
+          </div>
+        `;
+        console.error(error);
+      }
+    }
+
+    bookingForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const name = document.getElementById('name').value.trim();
+      const phone = document.getElementById('phone').value.trim();
+      const date = document.getElementById('date').value;
+      const notes = document.getElementById('notes').value.trim();
+      const durationEl = document.getElementById('duration');
+      const dayTypeEl = document.getElementById('dayType');
+      const depositEl = document.getElementById('deposit');
+
+      const durationValue = Number(durationEl.value);
+      const durationText = durationEl.options[durationEl.selectedIndex].text;
+      const dayTypeValue = dayTypeEl.value;
+      const dayTypeText = dayTypeEl.options[dayTypeEl.selectedIndex].text;
+      const depositValue = Number(depositEl.value || 0);
+      const total = prices[durationValue][dayTypeValue];
+      const remaining = Math.max(total - depositValue, 0);
+
+      const message = `السلام عليكم، عندي طلب حجز جديد في منتجع رمال.\n\nالاسم: ${name}\nرقم الجوال: ${phone}\nتاريخ الحجز: ${date}\nمدة الحجز: ${durationText}\nنوع اليوم: ${dayTypeText}\nإجمالي السعر: ${total} ريال\nالعربون: ${depositValue} ريال\nالمتبقي: ${remaining} ريال\nملاحظات: ${notes || 'لا يوجد'}`;
+
+      try {
+        await addDoc(collection(db, 'bookings'), {
+          name,
+          phone,
+          date,
+          duration: durationText,
+          durationValue,
+          dayType: dayTypeText,
+          dayTypeValue,
+          price: total,
+          deposit: depositValue,
+          remaining,
+          notes,
+          status: 'pending',
+          soapField: false,
+          createdAt: new Date().toISOString()
+        });
+
+        successMessage.style.display = 'block';
+        await loadAvailability();
+      } catch (error) {
+        console.error(error);
+      }
+
+      bookingForm.reset();
+      updatePrice();
+      window.location.href = `https://wa.me/966556662246?text=${encodeURIComponent(message)}`;
+    });
+
+    loadAvailability();
   </script>
 </body>
 </html>
