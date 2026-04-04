@@ -1,3 +1,63 @@
+import { initializeApp, cert, getApps } from "firebase-admin/app";
+import { getFirestore } from "firebase-admin/firestore";
+
+const firebaseConfig = {
+  projectId: "alrimal2",
+};
+
+const serviceAccount = {
+  projectId: process.env.FIREBASE_PROJECT_ID,
+  clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
+  privateKey: process.env.FIREBASE_PRIVATE_KEY?.replace(/\\n/g, "\n"),
+};
+
+if (!getApps().length) {
+  initializeApp({
+    credential: cert(serviceAccount),
+    ...firebaseConfig,
+  });
+}
+
+const db = getFirestore();
+
+function normalizeArabicDigits(value = "") {
+  return String(value)
+    .replace(/[٠-٩]/g, (d) => "٠١٢٣٤٥٦٧٨٩".indexOf(d))
+    .trim();
+}
+
+function extractDateFromMessage(message) {
+  const text = normalizeArabicDigits(message);
+
+  // صيغة مثل 2026-04-10
+  const isoMatch = text.match(/\b(20\d{2}-\d{1,2}-\d{1,2})\b/);
+  if (isoMatch) return isoMatch[1];
+
+  // صيغة مثل 10/4/2026 أو 10-4-2026
+  const slashMatch = text.match(/\b(\d{1,2})[\/\-](\d{1,2})[\/\-](20\d{2})\b/);
+  if (slashMatch) {
+    const day = slashMatch[1].padStart(2, "0");
+    const month = slashMatch[2].padStart(2, "0");
+    const year = slashMatch[3];
+    return `${year}-${month}-${day}`;
+  }
+
+  return null;
+}
+
+async function checkDateAvailability(date) {
+  const snapshot = await db.collection("bookings").where("date", "==", date).get();
+
+  const activeBookings = snapshot.docs
+    .map((doc) => ({ id: doc.id, ...doc.data() }))
+    .filter((item) => item.status !== "cancelled");
+
+  return {
+    isAvailable: activeBookings.length === 0,
+    bookings: activeBookings,
+  };
+}
+
 export default async function handler(req, res) {
   if (req.method !== "POST") {
     return res.status(405).json({ error: "Method not allowed" });
@@ -10,85 +70,30 @@ export default async function handler(req, res) {
       return res.status(400).json({ error: "No message provided" });
     }
 
-    const systemPrompt = `
-أنت مساعد ذكي خاص بمنتجع ومخيم رمال.
-مهمتك الرد فقط على أسئلة العملاء المتعلقة بالمنتجع.
-لا تتكلم في مواضيع خارجية.
-كن مختصرًا، واضحًا، واحترافيًا.
+    const requestedDate = extractDateFromMessage(message);
 
-معلومات المنتجع:
-- الاسم: منتجع ومخيم  رمال
-- مدة الحجز:
-  12 ساعة:
-    وسط الأسبوع: 800 ريال
-    نهاية الأسبوع: 950 ريال
-    الأعياد: 1200 ريال
-  24 ساعة:
-    وسط الأسبوع: 1300 ريال
-    نهاية الأسبوع: 1700 ريال
-    الأعياد: 2200 ريال
+    // إذا العميل كتب تاريخ، نتحقق أولًا من Firebase
+    if (requestedDate) {
+      const availability = await checkDateAvailability(requestedDate);
 
-الخدمات:
-- مجلس رجال
-- مجلس حريم
-- مطبخ
-- ملعب
-- مسبح
-- ألعاب مائية
-- ألعاب أطفال
+      if (!availability.isAvailable) {
+        return res.status(200).json({
+          reply: `التاريخ ${requestedDate} غير متاح حاليًا. أرسل لي تاريخ ثاني وأشيك لك مباشرة.`,
+        });
+      }
 
-معلومات إضافية:
-- الملعب الصابوني: 150 ريال
-- الملعب الصابوني لا يتاح إلا بعد وجود حجز
-- لن يتم تأكيد الحجز إلا بعد دفع العربون
-- يتم دفع باقي المبلغ والتأمين 500 ريال عند الدخول
-- التأمين 500 ريال ويدفع قبل الدخول ويسترجع عند سلامة محتويات المنتجع
-- يجب مراقبة الأطفال في المسبح وحوله لأن عمق المسبح 2 متر
-- يجب المحافظة على محتويات المنتجع ويتحمل المستأجر أي أضرار
-- يخصم 100 ريال في حال عدم نظافة المنتجع
-- العربون لا يسترجع في حال إلغاء الحجز
-- لا يسمح بإخراج الفرش أو الأثاث للخارج
-
-إذا سأل العميل عن الحجز:
-- قل له يقدر يحجز من النموذج الموجود بالموقع
-- أو يتواصل عبر الواتساب
-
-رقم الواتساب:
-0556662246
-`;
-
-    const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
-      method: "POST",
-      headers: {
-        "Authorization": `Bearer ${process.env.OPENROUTER_API_KEY}`,
-        "Content-Type": "application/json",
-        "HTTP-Referer": "https://your-site.vercel.app",
-        "X-Title": "Rimal Booking"
-      },
-      body: JSON.stringify({
-        model: "openai/gpt-4o-mini",
-        messages: [
-          { role: "system", content: systemPrompt },
-          { role: "user", content: message }
-        ],
-        temperature: 0.4
-      })
-    });
-
-    const data = await response.json();
-
-    if (!response.ok) {
-      return res.status(500).json({
-        error: data?.error?.message || "OpenRouter request failed"
+      return res.status(200).json({
+        reply: `التاريخ ${requestedDate} متاح مبدئيًا ✅\nإذا حاب أكمل الحجز أرسل لي:\n- الاسم\n- رقم الجوال\n- مدة الحجز (12 أو 24 ساعة)\n- نوع اليوم`,
       });
     }
 
-    const reply = data?.choices?.[0]?.message?.content || "تعذر الرد الآن، حاول مرة ثانية.";
-
-    return res.status(200).json({ reply });
+    // إذا ما فيه تاريخ، يرد رد عام
+    return res.status(200).json({
+      reply: `حياك الله 🌷\nأرسل لي تاريخ الحجز بالشكل هذا:\n2026-04-10\nوأشيك لك فورًا هل هو متاح أو لا.`,
+    });
   } catch (error) {
     return res.status(500).json({
-      error: error.message || "Server error"
+      error: error.message || "Server error",
     });
   }
 }
