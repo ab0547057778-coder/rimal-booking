@@ -32,7 +32,7 @@ export default async function handler(req, res) {
 - مجلس رجال
 - مجلس حريم
 - مطبخ
-- ملعب
+-  ملعب كرة قدم
 - مسبح
 - ألعاب مائية
 - ألعاب أطفال
